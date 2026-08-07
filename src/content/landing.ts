@@ -24,9 +24,10 @@ import {
  */
 
 export const nav = [
-  { label: "Recursos", href: "#recursos" },
-  { label: "Como funciona", href: "#como-funciona" },
-  { label: "Diferenciais", href: "#diferenciais" },
+  { label: "Recursos", href: "/#recursos" },
+  { label: "Como funciona", href: "/#como-funciona" },
+  { label: "Diferenciais", href: "/#diferenciais" },
+  { label: "Planos e Preços", href: "/planos" },
 ] as const;
 
 export const hero = {
@@ -224,15 +225,15 @@ export const trust = {
 } as const;
 
 export const plans = {
-  eyebrow: "Planos",
-  title: "Planos sob medida. Fale com a gente.",
-  lead: "A operação de um corretor autônomo não é a de uma imobiliária com dez corretores. Em vez de tabela pública, a gente monta o plano com você na demonstração: módulos, volume e preço.",
+  eyebrow: "Planos e Assinaturas",
+  title: "Tudo o que sua operação precisa.",
+  lead: "Organize clientes, imóveis, contratos, finanças, aluguéis e oportunidades em uma plataforma criada para o mercado imobiliário. Escolha o plano ideal para o tamanho do seu negócio.",
   points: [
-    "Você começa pelo módulo que resolve a sua dor maior.",
-    "Migração dos contratos que já existem, com a IA lendo os PDFs.",
-    "Sem tabela genérica: o plano acompanha o tamanho da sua carteira.",
+    "Teste grátis por 14 dias sem cartão.",
+    "Planos que acompanham seu crescimento.",
+    "Desconto de 2 meses no ciclo anual.",
   ],
-  cta: "Agendar demonstração",
+  cta: "Ver planos e preços",
 } as const;
 
 export const finalCta = {
@@ -283,8 +284,8 @@ export const footer = {
       links: [
         { label: "Recursos", href: "#recursos" },
         { label: "Como funciona", href: "#como-funciona" },
-        { label: "Diferenciais", href: "#diferenciais" },
-        { label: "Planos", href: "#planos" },
+        { label: "Diferenciais", href: "/#diferenciais" },
+        { label: "Planos", href: "/planos" },
       ],
     },
   ],

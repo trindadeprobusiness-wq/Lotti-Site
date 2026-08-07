@@ -29,7 +29,7 @@ export function Plans() {
               ))}
             </ul>
 
-            <Button href="#demo" arrow className="self-start">
+            <Button href="/planos" arrow className="self-start">
               {plans.cta}
             </Button>
           </div>

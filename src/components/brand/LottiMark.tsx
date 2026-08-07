@@ -20,10 +20,10 @@ export function LottiMark(props: SVGProps<SVGSVGElement>) {
       aria-hidden="true"
       {...props}
     >
-      <path d="M0 80 L14 80 L56.5 0 L42.5 0 Z" />
-      <path d="M18 80 L32 80 L62.8 22 L48.8 22 Z" />
-      <path d="M36 80 L50 80 L69.1 44 L55.1 44 Z" />
-      <rect x="76" y="36" width="24" height="44" rx="12" />
+      <path d="M0 80 L16 80 L58.5 0 L53.125 0 Q42.5 0 31.875 20 Z" />
+      <path d="M21 80 L37 80 L67.8125 22 L51.8125 22 Z" />
+      <path d="M42 80 L58 80 L77.125 44 L61.125 44 Z" />
+      <rect x="82" y="34" width="16" height="46" rx="8" />
     </svg>
   );
 }
@@ -33,6 +33,6 @@ export const MARK_RATIO = 100 / 80;
 
 /**
  * Área de proteção do manual: a altura da pílula (X) do símbolo.
- * Aqui, 44 de 80 unidades de altura.
+ * Aqui, 46 de 80 unidades de altura.
  */
-export const CLEAR_SPACE_RATIO = 44 / 80;
+export const CLEAR_SPACE_RATIO = 46 / 80;

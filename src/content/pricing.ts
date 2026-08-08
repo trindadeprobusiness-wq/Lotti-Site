@@ -17,7 +17,7 @@ import {
 export const pricingCopy = {
   title: 'Tudo o que sua operação imobiliária precisa em um só lugar',
   subtitle: 'Organize clientes, imóveis, contratos, finanças, aluguéis e oportunidades em uma plataforma criada para o mercado imobiliário.',
-  trialBadge: 'Teste grátis por 14 dias — sem cartão de crédito',
+  trialBadge: 'Teste grátis por 14 dias sem cartão de crédito',
   annualSaveBadge: 'Economize 2 meses',
   founderBadge: 'Preço especial de lançamento',
   highlightBadge: 'MAIS ESCOLHIDO',
@@ -171,9 +171,9 @@ export const comparisonFeatures = [
 export const pricingFAQ = [
   { question: 'Preciso de cartão de crédito para testar?', answer: 'Não. O teste gratuito de 14 dias não pede cartão. Você escolhe o plano só quando decidir continuar.' },
   { question: 'O que acontece quando o teste termina?', answer: 'Seus dados ficam seguros em modo somente leitura por 7 dias. Nada é apagado. Basta escolher um plano para continuar usando.' },
-  { question: 'Posso trocar de plano depois?', answer: 'Sim. Upgrade é imediato — os novos limites são liberados na hora. Downgrade vale a partir do próximo ciclo.' },
+  { question: 'Posso trocar de plano depois?', answer: 'Sim. Upgrade é imediato, os novos limites são liberados na hora. Downgrade vale a partir do próximo ciclo.' },
   { question: 'O plano anual tem desconto?', answer: 'Sim. São dois meses gratuitos: você paga 10 meses pelo preço de 12. Cerca de 16,7% de economia.' },
   { question: 'Os dados são meus?', answer: 'Totalmente. Seus clientes, imóveis, contratos e finanças pertencem a você. Oferecemos exportação a qualquer momento.' },
-  { question: 'Como funciona a cobrança dos boletos pelo Asaas?', answer: 'A Lotti organiza as faturas e repasses. O processamento financeiro passa pelo Asaas, que é uma instituição regulada. As tarifas de boleto, Pix e cartão são as do próprio Asaas — não adicionamos margem escondida.' },
-  { question: 'Qual é o preço de fundador?', answer: 'Os 100 primeiros clientes ganham até 20% de desconto por 12 meses. Depois disso, o valor passa para o preço oficial — avisamos com 30 dias de antecedência.' },
+  { question: 'Como funciona a cobrança dos boletos pelo Asaas?', answer: 'A Lotti organiza as faturas e repasses. O processamento financeiro passa pelo Asaas, que é uma instituição regulada. As tarifas de boleto, Pix e cartão são as do próprio Asaas, não adicionamos margem escondida.' },
+  { question: 'Qual é o preço de fundador?', answer: 'Os 100 primeiros clientes ganham até 20% de desconto por 12 meses. Depois disso, o valor passa para o preço oficial e avisamos com 30 dias de antecedência.' },
 ];

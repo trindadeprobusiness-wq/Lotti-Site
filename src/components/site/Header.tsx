@@ -47,7 +47,7 @@ export function Header() {
       <div className="shell flex h-full items-center justify-between gap-6">
         <a
           href="#topo"
-          aria-label={`${"Lotti"} — início da página`}
+          aria-label={`${"Lotti"} - início da página`}
           className="-m-2 rounded-md p-2"
         >
           <Logo size={24} />

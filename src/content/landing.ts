@@ -27,7 +27,7 @@ export const nav = [
   { label: "Recursos", href: "/#recursos" },
   { label: "Como funciona", href: "/#como-funciona" },
   { label: "Diferenciais", href: "/#diferenciais" },
-  { label: "Planos e Preços", href: "/planos" },
+  { label: "Planos e Preços", href: "/#planos" },
 ] as const;
 
 export const hero = {
@@ -55,7 +55,7 @@ export const problem = {
     },
     {
       before: "O contrato leva dias, depende de modelo antigo e volta com correção.",
-      after: "A IA redige o contrato completo em minutos — ou lê o que já existe e extrai os dados.",
+      after: "A IA redige o contrato completo em minutos ou lê o que já existe e extrai os dados.",
     },
     {
       before: "Cobrança, baixa e repasse feitos na mão, um a um, sujeitos a erro.",
@@ -82,7 +82,7 @@ export const features = {
       label: "Funil de vendas",
       title: "O negócio inteiro numa tela, arrastando de etapa.",
       description:
-        "Kanban de arrastar e soltar com o valor em negociação somado por etapa. Cada cliente carrega o histórico e os follow-ups agendados disparam alerta — o retorno deixa de depender de você lembrar.",
+        "Kanban de arrastar e soltar com o valor em negociação somado por etapa. Cada cliente carrega o histórico e os follow-ups agendados disparam alerta. O retorno deixa de depender de você lembrar.",
       points: [
         "Valor em negociação por etapa",
         "Histórico completo por cliente",
@@ -94,7 +94,7 @@ export const features = {
       label: "Fachadas Inteligentes",
       title: "A placa na rua vira lead no funil, sozinha.",
       description:
-        "Gere a placa ou o banner com QR Code em formatos prontos para impressão. Quem passa na frente do imóvel escaneia, encontra uma página profissional, deixa nome e telefone — e entra no funil automaticamente.",
+        "Gere a placa ou o banner com QR Code em formatos prontos para impressão. Quem passa na frente do imóvel escaneia, encontra uma página profissional, deixa nome e telefone e entra no funil automaticamente.",
       points: [
         "Formatos prontos para impressão",
         "Página do imóvel com captura de contato",
@@ -109,7 +109,7 @@ export const features = {
       label: "Contratos por IA",
       title: "Duas vias: a IA escreve e a IA lê.",
       description:
-        "Gere contratos completos em minutos a partir dos dados do CRM. Ou envie um PDF ou uma foto de contrato que já existe — a IA extrai inquilino, proprietário, imóvel, valor, prazo e taxa.",
+        "Gere contratos completos em minutos a partir dos dados do CRM. Ou envie um PDF ou uma foto de contrato que já existe e a IA extrai inquilino, proprietário, imóvel, valor, prazo e taxa.",
     },
     {
       icon: Banknote,
@@ -123,7 +123,7 @@ export const features = {
       label: "Assistente de IA",
       title: "Um chat que conhece os seus números.",
       description:
-        "Pergunte sobre clientes, imóveis, contratos e finanças e receba a resposta com base nos dados reais do seu CRM. O assistente sugere a próxima ação — e toda ação passa pela sua confirmação.",
+        "Pergunte sobre clientes, imóveis, contratos e finanças e receba a resposta com base nos dados reais do seu CRM. O assistente sugere a próxima ação e toda ação passa pela sua confirmação.",
     },
     {
       icon: FileStack,
@@ -179,7 +179,7 @@ export const howItWorks = {
     {
       title: "Crie sua conta",
       description:
-        "Cadastro self-service com o seu CRECI. Sua base nasce isolada — os seus dados não dividem espaço com os de ninguém.",
+        "Cadastro self-service com o seu CRECI. Sua base nasce isolada, os seus dados não dividem espaço com os de ninguém.",
     },
     {
       title: "Traga imóveis e clientes",
@@ -194,7 +194,7 @@ export const howItWorks = {
     {
       title: "Cobre e repasse no automático",
       description:
-        "Fatura mensal, baixa via Asaas e repasse calculado ao proprietário. Você confere — não digita.",
+        "Fatura mensal, baixa via Asaas e repasse calculado ao proprietário. Você confere e não digita.",
     },
   ],
 } as const;
@@ -285,7 +285,7 @@ export const footer = {
         { label: "Recursos", href: "#recursos" },
         { label: "Como funciona", href: "#como-funciona" },
         { label: "Diferenciais", href: "/#diferenciais" },
-        { label: "Planos", href: "/planos" },
+        { label: "Planos", href: "/#planos" },
       ],
     },
   ],

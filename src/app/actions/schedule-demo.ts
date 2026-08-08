@@ -31,7 +31,7 @@ const schema = z.object({
     .refine((digits) => digits.length >= 10 && digits.length <= 13, {
       message: "Informe DDD e número, ex.: (11) 98765-4321.",
     }),
-  email: z.email("Confira o e-mail — parece incompleto.").max(160),
+  email: z.string().email("Confira o e-mail, parece incompleto.").max(160),
   creci: z.string().trim().max(40, "CRECI muito longo.").optional(),
   portfolio: z
     .string()
@@ -130,14 +130,14 @@ export async function scheduleDemo(
         from,
         to: [to],
         reply_to: lead.email,
-        subject: `Demonstração — ${lead.name}`,
+        subject: `Demonstração - ${lead.name}`,
         text: [
           "Novo pedido de demonstração pelo site.",
           "",
           `Nome:      ${lead.name}`,
           `WhatsApp:  ${lead.whatsapp}`,
           `E-mail:    ${lead.email}`,
-          `CRECI:     ${lead.creci || "—"}`,
+          `CRECI:     ${lead.creci || "-"}`,
           `Carteira:  ${lead.portfolio}`,
           "",
           `Origem: ${siteConfig.url}`,

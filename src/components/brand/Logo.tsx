@@ -46,12 +46,20 @@ export function Logo({
         />
       ) : (
         <>
-          <LottiMark style={{ height: size, width: "auto", display: "block" }} />
+          <LottiMark
+            style={{ height: size, width: "auto", display: "block", flex: "none" }}
+          />
           <span
             style={{
-              fontSize: size * 1.18,
-              fontWeight: 500,
-              letterSpacing: "-0.025em",
+              fontFamily:
+                "var(--font-sora), ui-sans-serif, system-ui, sans-serif",
+              // O manual alinha o topo do "L" ao topo do símbolo e a baseline
+              // à base dele. O cap-height da Sora é ~0,7em, então a fonte
+              // precisa medir size/0,7 para o cap bater com a altura do símbolo;
+              // com line-height 1 e alinhamento central o encaixe é exato.
+              fontSize: size / 0.7,
+              fontWeight: 600,
+              letterSpacing: "-0.02em",
               lineHeight: 1,
             }}
           >

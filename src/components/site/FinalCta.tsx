@@ -8,7 +8,7 @@ import { finalCta } from "@/content/landing";
  */
 export function FinalCta() {
   return (
-    <section id="demo" className="on-ink section bg-ink text-paper">
+    <section id="demo" className="on-ink section bg-ink pb-16 text-paper">
       <div className="shell grid gap-12 lg:grid-cols-[1fr_1.05fr] lg:gap-20">
         <div>
           {/* .eyebrow é inline-flex, então o logo precisa de um bloco próprio

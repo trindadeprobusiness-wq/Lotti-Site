@@ -94,6 +94,19 @@
     outline-color: var(--color-paper);
   }
 
+  /* Scrollbar invisível — a rolagem continua funcionando normalmente */
+  html {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar,
+  *::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none;
+  }
+
   ::selection {
     background-color: var(--color-ink);
     color: var(--color-paper);
@@ -149,12 +162,7 @@
   }
 
   .eyebrow::before {
-    content: "";
-    width: 1.75rem;
-    height: 2px;
-    flex: none;
-    background-color: currentColor;
-    transform: skewX(var(--blade-skew));
+    content: none;
   }
 
   /* Variante sem a régua, para quando já existe um ícone ao lado.

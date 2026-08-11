@@ -49,8 +49,11 @@ export function TextReveal({
 
   const words = text.split(" ");
 
+  const isGradient = className.includes("text-gradient");
+  const outerClassName = className.replace("text-gradient", "").trim();
+
   return (
-    <Tag ref={ref as never} className={className} aria-label={text}>
+    <Tag ref={ref as never} className={outerClassName} aria-label={text}>
       <span className="sr-only">{text}</span>
       <span aria-hidden="true" className="inline-block">
         {words.map((word, i) => (
@@ -60,7 +63,9 @@ export function TextReveal({
             style={{ marginRight: "0.25em" }}
           >
             <span
-              className="inline-block transition-all duration-[800ms]"
+              className={`inline-block transition-all duration-[800ms] ${
+                isGradient ? "text-gradient" : ""
+              }`}
               style={{
                 opacity: visible ? 1 : 0,
                 transform: visible ? "translateY(0)" : "translateY(100%)",

@@ -46,18 +46,26 @@ export function PricingCards() {
             return (
               <Reveal key={plan.code} delay={i * 0.1}>
                 <div
+                  data-pricing-card={plan.highlighted ? "highlighted" : undefined}
                   className={`card relative flex h-full flex-col p-8 ${
                     plan.highlighted
-                      ? "border-beam-wrapper bg-surface shadow-2xl"
+                      ? "overflow-visible bg-surface shadow-2xl"
                       : "hover:-translate-y-1"
                   }`}
                 >
                   {plan.highlighted && (
-                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
-                      <span className="rounded-full bg-ink px-4 py-1 text-xs font-bold tracking-wider text-paper shadow-md">
-                        {pricingCopy.highlightBadge}
-                      </span>
-                    </div>
+                    <>
+                      <div
+                        data-pricing-beam=""
+                        aria-hidden="true"
+                        className="border-beam-wrapper pointer-events-none absolute inset-0 rounded-[inherit]"
+                      />
+                      <div className="absolute -top-4 left-1/2 z-10 -translate-x-1/2">
+                        <span className="inline-flex whitespace-nowrap rounded-full bg-ink px-4 py-1 text-xs font-bold tracking-wider text-paper shadow-md">
+                          {pricingCopy.highlightBadge}
+                        </span>
+                      </div>
+                    </>
                   )}
 
                   <div className="mb-6 flex items-center gap-3">

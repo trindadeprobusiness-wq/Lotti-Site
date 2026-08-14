@@ -48,3 +48,17 @@ test("preenche o carrossel sem lacunas e remove os quadros do CTA", async () => 
     /data-final-logo=""[^>]*class="[^"]*hover:scale-105/,
   );
 });
+
+test("mantém o selo do plano destacado fora da camada que recorta o efeito", async () => {
+  const { response, body } = await get("/planos");
+
+  assert.equal(response.status, 200);
+  assert.match(
+    body,
+    /data-pricing-card="highlighted"[^>]*class="[^"]*overflow-visible/,
+  );
+  assert.match(
+    body,
+    /data-pricing-beam=""[^>]*class="[^"]*border-beam-wrapper/,
+  );
+});

@@ -28,11 +28,15 @@ export function Hero() {
           className="mt-7 max-w-[56ch] text-lead text-muted"
         />
 
-        <div className="mt-10 flex flex-wrap items-center gap-3">
-          <Button href="#demo" arrow className="btn-shimmer shadow-lg">
+        <div className="mt-10 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
+          <Button href="#demo" arrow className="btn-shimmer w-full shadow-lg sm:w-auto">
             {hero.primaryCta}
           </Button>
-          <Button href="#recursos" variant="secondary" className="glass transition-transform hover:scale-105">
+          <Button
+            href="#recursos"
+            variant="secondary"
+            className="glass w-full transition-transform hover:scale-105 sm:w-auto"
+          >
             {hero.secondaryCta}
           </Button>
         </div>

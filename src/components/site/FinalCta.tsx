@@ -13,7 +13,7 @@ export function FinalCta() {
         <div>
           {/* .eyebrow é inline-flex, então o logo precisa de um bloco próprio
               para não dividir a linha com ele. */}
-          <div className="transition-transform duration-500 hover:scale-105">
+          <div data-final-logo="">
             <Logo size={24} tone="paper" />
           </div>
 
@@ -23,16 +23,6 @@ export function FinalCta() {
           </h2>
           <p className="mt-5 max-w-[46ch] text-lead text-white/70">{finalCta.lead}</p>
 
-          <ul className="mt-9 flex flex-wrap gap-2">
-            {finalCta.reassurance.map((item) => (
-              <li
-                key={item}
-                className="rounded-full border border-white/20 px-3.5 py-1.5 text-eyebrow uppercase text-white/70 transition-colors hover:bg-white/10 hover:text-white"
-              >
-                {item}
-              </li>
-            ))}
-          </ul>
         </div>
 
         <div className="lg:pt-2">

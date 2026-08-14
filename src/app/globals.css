@@ -62,6 +62,21 @@
   --header-h: 4.5rem;
 }
 
+/* Keyframes ficam no root do arquivo, fora de @layer.
+   O Tailwind v4 remove @keyframes definido dentro de camadas se nenhuma
+   utility conhecida os referencia — o que quebra o marquee da Trust. */
+@keyframes marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    /* -50% cobre metade do trilho (o segundo conjunto duplicado).
+       O + (-1rem) compensa o gap entre os dois conjuntos: sem ele o
+       segundo A B C chega 16px cedo demais e a costura fica visível. */
+    transform: translate3d(calc(-50% - 1rem), 0, 0);
+  }
+}
+
 @layer base {
   html {
     /* clip em vez de hidden: não quebra position: sticky do header */
@@ -139,6 +154,8 @@
      de seção — é aqui que layouts assim costumam brigar consigo mesmos. */
   .section {
     padding-block: clamp(4.5rem, 9vw, 8rem);
+    content-visibility: auto;
+    contain-intrinsic-size: auto 800px;
   }
 
   .shell {
@@ -460,22 +477,29 @@
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
   }
 
-  /* --- Marquee Animation --- */
-  @keyframes marquee {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(calc(-100% - 2rem));
-    }
-  }
-  
   .animate-marquee {
-    animation: marquee 30s linear infinite;
+    animation: marquee 60s linear infinite;
+    width: max-content;
+    will-change: transform;
+    backface-visibility: hidden;
   }
-  
-  .animate-marquee:hover {
+
+  .marquee-viewport {
+    contain: layout paint;
+    isolation: isolate;
+  }
+
+  .animate-marquee:hover,
+  .animate-marquee:focus-within {
     animation-play-state: paused;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-marquee {
+      animation: none;
+      transform: none;
+      will-change: auto;
+    }
   }
 
   /* --- Shimmer Effect (Buttons/Highlights) --- */

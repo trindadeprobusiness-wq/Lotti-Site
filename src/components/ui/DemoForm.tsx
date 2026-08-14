@@ -138,6 +138,7 @@ export function DemoForm() {
           <Button
             variant="inverted-ghost"
             href={whatsapp}
+            className="w-full sm:w-auto"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -153,7 +154,13 @@ export function DemoForm() {
 function SubmitButton() {
   const { pending } = useFormStatus();
   return (
-    <Button type="submit" variant="inverted" arrow={!pending} disabled={pending}>
+    <Button
+      type="submit"
+      variant="inverted"
+      arrow={!pending}
+      disabled={pending}
+      className="w-full sm:w-auto"
+    >
       {pending ? copy.submitting : copy.submit}
     </Button>
   );

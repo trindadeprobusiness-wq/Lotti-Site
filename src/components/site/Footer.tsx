@@ -1,27 +1,25 @@
-import { siteConfig, isPending, whatsappUrl, mailtoUrl } from "@/config/site";
+import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
+import { Logo } from "@/components/brand/Logo";
 import { InstagramIcon, LinkedinIcon } from "@/components/ui/SocialIcons";
+import { isPending, mailtoUrl, siteConfig, whatsappUrl } from "@/config/site";
 import { footer } from "@/content/landing";
 
 export function Footer() {
   const year = new Date().getFullYear();
   const whatsapp = whatsappUrl();
   const mailto = mailtoUrl();
-
   const hasSocial =
     !isPending(siteConfig.social.instagram) ||
     !isPending(siteConfig.social.linkedin);
 
-  const hasContact = whatsapp || mailto;
-
   return (
     <footer className="on-ink border-t border-white/12 bg-ink text-paper">
       <div className="shell py-12 md:py-16">
-        {/* Grid principal */}
-        <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr] lg:gap-16">
-          {/* Coluna da marca */}
+        <div className="grid gap-10 lg:grid-cols-[1.35fr_0.8fr_1fr] lg:gap-20">
           <div>
-            <p className="text-h3 font-semibold text-paper">{siteConfig.name}</p>
-            <p className="mt-3 max-w-[36ch] text-small text-white/50">
+            <Logo size={25} tone="paper" />
+            <p className="mt-4 max-w-[36ch] text-small text-white/50">
               {footer.description}
             </p>
 
@@ -53,9 +51,8 @@ export function Footer() {
             ) : null}
           </div>
 
-          {/* Colunas de links */}
           {footer.columns.map((column) => (
-            <div key={column.title}>
+            <nav key={column.title} aria-label={column.title}>
               <p className="text-eyebrow uppercase tracking-wider text-white/40">
                 {column.title}
               </p>
@@ -71,25 +68,35 @@ export function Footer() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </nav>
           ))}
 
-          {/* Coluna de contato */}
-          {hasContact ? (
-            <div>
-              <p className="text-eyebrow uppercase tracking-wider text-white/40">
-                Contato
-              </p>
-              <ul className="mt-4 flex flex-col gap-3">
+          <div>
+            <p className="text-eyebrow uppercase tracking-wider text-white/40">
+              Próximo passo
+            </p>
+            <p className="mt-4 max-w-[28ch] text-small text-white/60">
+              Veja a Lotti funcionando com os dados e a rotina da sua operação.
+            </p>
+            <Link
+              href="/#demo"
+              className="mt-5 inline-flex items-center gap-2 text-small font-semibold text-paper transition-opacity hover:opacity-70"
+            >
+              Agendar demonstração
+              <ArrowUpRight size={16} aria-hidden="true" />
+            </Link>
+
+            {whatsapp || mailto ? (
+              <ul className="mt-5 flex flex-col gap-3 border-t border-white/10 pt-5">
                 {whatsapp ? (
                   <li>
                     <a
                       href={whatsapp}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-small text-white/60 transition-colors hover:text-paper"
+                      className="text-small text-white/50 transition-colors hover:text-paper"
                     >
-                      WhatsApp {!isPending(siteConfig.whatsappLabel) ? `— ${siteConfig.whatsappLabel}` : ""}
+                      WhatsApp
                     </a>
                   </li>
                 ) : null}
@@ -97,18 +104,17 @@ export function Footer() {
                   <li>
                     <a
                       href={mailto}
-                      className="text-small text-white/60 transition-colors hover:text-paper"
+                      className="text-small text-white/50 transition-colors hover:text-paper"
                     >
                       {siteConfig.email}
                     </a>
                   </li>
                 ) : null}
               </ul>
-            </div>
-          ) : null}
+            ) : null}
+          </div>
         </div>
 
-        {/* Barra inferior */}
         <div className="mt-12 flex flex-col gap-3 border-t border-white/8 pt-8 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-small text-white/40">
             © {year} {siteConfig.name}. Todos os direitos reservados.

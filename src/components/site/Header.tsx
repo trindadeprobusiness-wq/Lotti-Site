@@ -53,7 +53,7 @@ export function Header() {
           <Logo size={24} />
         </a>
 
-        <nav aria-label="Seções do site" className="hidden items-center gap-9 md:flex">
+        <nav aria-label="Seções do site" className="hidden items-center gap-9 lg:flex">
           {nav.map((item) => (
             <a
               key={item.href}
@@ -66,13 +66,13 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Button href="#demo" className="hidden md:inline-flex">
+          <Button href="#demo" className="hidden lg:inline-flex">
             {hero.primaryCta}
           </Button>
 
           <button
             type="button"
-            className="-m-2 rounded-md p-2 text-ink md:hidden"
+            className="-m-2 rounded-md p-2 text-ink lg:hidden"
             aria-expanded={open}
             aria-controls="menu-mobile"
             aria-label={open ? "Fechar menu" : "Abrir menu"}
@@ -87,7 +87,7 @@ export function Header() {
       <div
         id="menu-mobile"
         hidden={!open}
-        className="border-t border-line bg-paper md:hidden"
+        className="border-t border-line bg-paper lg:hidden"
         style={{ height: "calc(100dvh - var(--header-h))" }}
       >
         <div className="shell flex h-full flex-col justify-between py-8">

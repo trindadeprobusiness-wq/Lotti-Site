@@ -1,12 +1,11 @@
-import { siteConfig } from "@/config/site";
-import { CLEAR_SPACE_RATIO, LottiMark } from "./LottiMark";
+import { CLEAR_SPACE_RATIO } from "./LottiMark";
 
 type LogoProps = {
-  /** Altura do símbolo em px. O wordmark escala junto. */
+  /** Altura de referência da assinatura em px. */
   size?: number;
-  /** Cor da marca. "paper" é a versão invertida, para a faixa preta. */
+  /** Variante para fundo claro (ink) ou escuro (paper). */
   tone?: "ink" | "paper";
-  /** Aplica a área de proteção do manual (altura da pílula) ao redor. */
+  /** Aplica a área de proteção definida pela marca. */
   clearSpace?: boolean;
   className?: string;
 };
@@ -18,55 +17,20 @@ export function Logo({
   className,
 }: LogoProps) {
   const padding = clearSpace ? size * CLEAR_SPACE_RATIO : 0;
+  const src =
+    tone === "paper"
+      ? "/brand/lotti-white.svg"
+      : "/brand/lotti-linear-dark.svg";
 
   return (
-    <span
-      className={className}
-      style={{
-        display: "inline-flex",
-        alignItems: "center",
-        gap: size * 0.3,
-        padding,
-        color: tone === "paper" ? "#ffffff" : "#000000",
-      }}
-    >
-      {siteConfig.useOfficialBrandFiles ? (
-        // O arquivo oficial é um SVG de proporção própria; deixamos a altura
-        // mandar e a largura seguir. next/image não otimiza SVG, então uma
-        // <img> simples é mais direta e não introduz layout shift aqui.
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          src={
-            tone === "paper"
-              ? "/brand/lotti-full-white.svg"
-              : "/brand/lotti-full.svg"
-          }
-          alt="Lotti"
-          style={{ height: size * 1.5, width: "auto", display: "block" }}
-        />
-      ) : (
-        <>
-          <LottiMark
-            style={{ height: size, width: "auto", display: "block", flex: "none" }}
-          />
-          <span
-            style={{
-              fontFamily:
-                "var(--font-sora), ui-sans-serif, system-ui, sans-serif",
-              // O manual alinha o topo do "L" ao topo do símbolo e a baseline
-              // à base dele. O cap-height da Sora é ~0,7em, então a fonte
-              // precisa medir size/0,7 para o cap bater com a altura do símbolo;
-              // com line-height 1 e alinhamento central o encaixe é exato.
-              fontSize: size / 0.7,
-              fontWeight: 600,
-              letterSpacing: "-0.02em",
-              lineHeight: 1,
-            }}
-          >
-            Lotti
-          </span>
-        </>
-      )}
+    <span className={className} style={{ display: "inline-flex", padding }}>
+      {/* O SVG oficial já reúne símbolo e lettering; não recompomos a marca. */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={src}
+        alt="Lotti"
+        style={{ height: size * 1.25, width: "auto", display: "block" }}
+      />
     </span>
   );
 }

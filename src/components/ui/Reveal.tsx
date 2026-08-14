@@ -1,6 +1,7 @@
 "use client";
 
-import { type ReactNode, useEffect, useRef, useState } from "react";
+import { type ReactNode, useRef } from "react";
+import { useRevealOnce } from "@/hooks/useRevealOnce";
 
 type RevealProps = {
   children: ReactNode;
@@ -10,11 +11,6 @@ type RevealProps = {
   as?: "div" | "li" | "section" | "article";
 };
 
-/**
- * Reveal on scroll de baixo custo: um IntersectionObserver por elemento,
- * desconectado assim que aparece. A animação em si mora no .reveal do
- * globals.css, que já é neutralizado por prefers-reduced-motion.
- */
 export function Reveal({
   children,
   delay = 0,
@@ -22,31 +18,7 @@ export function Reveal({
   as: Tag = "div",
 }: RevealProps) {
   const ref = useRef<HTMLElement>(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const node = ref.current;
-    if (!node) return;
-
-    // Sem suporte a IntersectionObserver: mostra e pronto.
-    if (typeof IntersectionObserver === "undefined") {
-      setVisible(true);
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin: "0px 0px -12% 0px", threshold: 0.05 },
-    );
-
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
+  const visible = useRevealOnce(ref);
 
   return (
     <Tag

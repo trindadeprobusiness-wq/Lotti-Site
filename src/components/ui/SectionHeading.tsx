@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { TextReveal } from "./TextReveal";
 
 type SectionHeadingProps = {
   eyebrow: string;
@@ -31,19 +32,34 @@ export function SectionHeading({
         .join(" ")}
     >
       <p className="eyebrow">{eyebrow}</p>
-      <h2
-        className={[
-          "mt-6 max-w-[19ch] text-h2 text-balance",
-          isPaper ? "text-paper" : "text-ink",
-        ].join(" ")}
-      >
-        {title}
-      </h2>
+      
+      {typeof title === "string" ? (
+        <TextReveal
+          as="h2"
+          text={title}
+          delay={100}
+          className={[
+            "mt-6 max-w-[19ch] text-h2 text-balance",
+            isPaper ? "text-paper" : "text-ink",
+          ].join(" ")}
+        />
+      ) : (
+        <h2
+          className={[
+            "mt-6 max-w-[19ch] text-h2 text-balance",
+            isPaper ? "text-paper" : "text-ink",
+          ].join(" ")}
+        >
+          {title}
+        </h2>
+      )}
+
       {lead ? (
         <p
           className={[
             "mt-5 max-w-[52ch] text-lead",
             isPaper ? "text-white/70" : "text-muted",
+            "reveal"
           ].join(" ")}
         >
           {lead}

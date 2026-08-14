@@ -92,7 +92,9 @@ export function Features() {
                 as="article"
                 key={feature.label}
                 delay={index * 60}
-                className="card flex flex-col p-6 sm:p-8"
+                className={`card flex flex-col p-6 sm:p-8 glass transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:border-ink/20 ${
+                  index === 0 || index === 3 ? "md:col-span-2 lg:col-span-1" : ""
+                }`}
               >
                 <FeatureLabel icon={Icon} label={feature.label} />
                 <h3 className="mt-5 max-w-[22ch] text-h3 text-ink">{feature.title}</h3>
@@ -103,7 +105,7 @@ export function Features() {
                     {features.supportModules.map(({ icon: ModuleIcon, label }) => (
                       <li
                         key={label}
-                        className="flex items-center gap-1.5 rounded-full border border-line px-3 py-1.5 text-eyebrow uppercase text-muted"
+                        className="flex items-center gap-1.5 rounded-full border border-line px-3 py-1.5 text-eyebrow uppercase text-muted transition-colors hover:bg-surface hover:text-ink"
                       >
                         <ModuleIcon size={13} strokeWidth={1.75} aria-hidden="true" />
                         {label}

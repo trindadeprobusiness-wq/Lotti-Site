@@ -1,61 +1,67 @@
-import { InstagramIcon, LinkedinIcon } from "@/components/ui/SocialIcons";
+import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
 import { Logo } from "@/components/brand/Logo";
+import { InstagramIcon, LinkedinIcon } from "@/components/ui/SocialIcons";
+import { isPending, mailtoUrl, siteConfig, whatsappUrl } from "@/config/site";
 import { footer } from "@/content/landing";
-import {
-  isPending,
-  mailtoUrl,
-  siteConfig,
-  whatsappUrl,
-} from "@/config/site";
 
 export function Footer() {
   const year = new Date().getFullYear();
   const whatsapp = whatsappUrl();
-  const mailto = mailtoUrl(`Contato pelo site ${siteConfig.domain}`);
-
-  const socials = [
-    { label: "Instagram", href: siteConfig.social.instagram, icon: InstagramIcon },
-    { label: "LinkedIn", href: siteConfig.social.linkedin, icon: LinkedinIcon },
-  ].filter((item) => !isPending(item.href));
+  const mailto = mailtoUrl();
+  const hasSocial =
+    !isPending(siteConfig.social.instagram) ||
+    !isPending(siteConfig.social.linkedin);
 
   return (
     <footer className="on-ink border-t border-white/12 bg-ink text-paper">
-      <div className="shell py-16 lg:py-20">
-        <div className="grid gap-12 md:grid-cols-[1.4fr_1fr_1fr]">
+      <div className="shell py-12 md:py-16">
+        <div className="grid gap-10 lg:grid-cols-[1.35fr_0.8fr_1fr] lg:gap-20">
           <div>
-            <Logo size={24} tone="paper" />
-            <p className="mt-6 max-w-[38ch] text-small text-white/60">
+            <Logo size={25} tone="paper" />
+            <p className="mt-4 max-w-[36ch] text-small text-white/50">
               {footer.description}
             </p>
 
-            {socials.length > 0 ? (
-              <ul className="mt-7 flex gap-2">
-                {socials.map(({ label, href, icon: Icon }) => (
-                  <li key={label}>
-                    <a
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`Lotti no ${label}`}
-                      className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-paper transition-colors hover:border-white/60"
-                    >
-                      <Icon width={17} height={17} />
-                    </a>
-                  </li>
-                ))}
-              </ul>
+            {hasSocial ? (
+              <div className="mt-6 flex items-center gap-4">
+                {!isPending(siteConfig.social.instagram) ? (
+                  <a
+                    href={siteConfig.social.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Instagram da Lotti"
+                    className="text-white/50 transition-colors hover:text-paper"
+                  >
+                    <InstagramIcon width={20} height={20} />
+                  </a>
+                ) : null}
+                {!isPending(siteConfig.social.linkedin) ? (
+                  <a
+                    href={siteConfig.social.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="LinkedIn da Lotti"
+                    className="text-white/50 transition-colors hover:text-paper"
+                  >
+                    <LinkedinIcon width={20} height={20} />
+                  </a>
+                ) : null}
+              </div>
             ) : null}
           </div>
 
           {footer.columns.map((column) => (
             <nav key={column.title} aria-label={column.title}>
-              <p className="eyebrow">{column.title}</p>
-              <ul className="mt-6 flex flex-col gap-3.5">
+              <p className="text-eyebrow uppercase tracking-wider text-white/40">
+                {column.title}
+              </p>
+              <ul className="mt-4 flex flex-col gap-3">
                 {column.links.map((link) => (
-                  <li key={link.href}>
+                  <li key={link.label}>
                     <a
                       href={link.href}
-                      className="text-small text-white/70 transition-colors hover:text-paper"
+                      className="text-small text-white/60 transition-colors hover:text-paper"
                     >
                       {link.label}
                     </a>
@@ -66,68 +72,56 @@ export function Footer() {
           ))}
 
           <div>
-            <p className="eyebrow">Contato</p>
-            <ul className="mt-6 flex flex-col gap-3.5 text-small">
-              <ContactItem
-                label="WhatsApp"
-                value={siteConfig.whatsappLabel}
-                href={whatsapp}
-              />
-              <ContactItem
-                label="E-mail"
-                value={siteConfig.email}
-                href={mailto}
-              />
-              <ContactItem
-                label="Site"
-                value={siteConfig.domain}
-                href={siteConfig.url}
-              />
-            </ul>
+            <p className="text-eyebrow uppercase tracking-wider text-white/40">
+              Próximo passo
+            </p>
+            <p className="mt-4 max-w-[28ch] text-small text-white/60">
+              Veja a Lotti funcionando com os dados e a rotina da sua operação.
+            </p>
+            <Link
+              href="/#demo"
+              className="mt-5 inline-flex items-center gap-2 text-small font-semibold text-paper transition-opacity hover:opacity-70"
+            >
+              Agendar demonstração
+              <ArrowUpRight size={16} aria-hidden="true" />
+            </Link>
+
+            {whatsapp || mailto ? (
+              <ul className="mt-5 flex flex-col gap-3 border-t border-white/10 pt-5">
+                {whatsapp ? (
+                  <li>
+                    <a
+                      href={whatsapp}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-small text-white/50 transition-colors hover:text-paper"
+                    >
+                      WhatsApp
+                    </a>
+                  </li>
+                ) : null}
+                {mailto ? (
+                  <li>
+                    <a
+                      href={mailto}
+                      className="text-small text-white/50 transition-colors hover:text-paper"
+                    >
+                      {siteConfig.email}
+                    </a>
+                  </li>
+                ) : null}
+              </ul>
+            ) : null}
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col gap-3 border-t border-white/12 pt-8 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-small text-white/50">
+        <div className="mt-12 flex flex-col gap-3 border-t border-white/8 pt-8 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-small text-white/40">
             © {year} {siteConfig.name}. Todos os direitos reservados.
           </p>
-          <p className="text-small text-white/50">{siteConfig.tagline}</p>
+          <p className="text-small text-white/40">{siteConfig.tagline}</p>
         </div>
       </div>
     </footer>
-  );
-}
-
-/**
- * Quando o dado ainda não foi preenchido, mostra o texto em vez de gerar
- * um link quebrado. Assim o que falta fica visível em vez de escondido.
- */
-function ContactItem({
-  label,
-  value,
-  href,
-}: {
-  label: string;
-  value: string;
-  href: string | null;
-}) {
-  const pending = isPending(value) || !href;
-
-  return (
-    <li className="flex flex-col gap-0.5">
-      <span className="text-white/40">{label}</span>
-      {pending ? (
-        <span className="text-white/70">{value}</span>
-      ) : (
-        <a
-          href={href}
-          target={href.startsWith("http") ? "_blank" : undefined}
-          rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-          className="text-white/70 transition-colors hover:text-paper"
-        >
-          {value}
-        </a>
-      )}
-    </li>
   );
 }

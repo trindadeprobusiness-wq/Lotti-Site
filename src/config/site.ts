@@ -20,9 +20,13 @@ export const siteConfig = {
   description:
     "CRM imobiliário com IA para corretores e pequenas imobiliárias. Captação por QR Code, funil de vendas, contratos gerados por IA e aluguéis com financeiro automático.",
 
-  /** Domínio de produção — usado em canonical, sitemap e Open Graph. */
-  domain: "lotti.com.br",
-  url: "https://lotti.com.br",
+  /**
+   * Domínio de produção — usado em canonical, sitemap e Open Graph.
+   * Provisório: aponta para o domínio da Vercel enquanto o definitivo não
+   * é conectado. Não use lotti.com.br — pertence a outro negócio.
+   */
+  domain: "lotti-site.vercel.app",
+  url: "https://lotti-site.vercel.app",
 
   /** Só dígitos, com DDI e DDD. Ex.: "5511987654321" */
   whatsapp: PENDING as string,

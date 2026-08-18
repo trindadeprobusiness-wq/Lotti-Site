@@ -286,6 +286,7 @@ export const footer = {
         { label: "Como funciona", href: "#como-funciona" },
         { label: "Diferenciais", href: "/#diferenciais" },
         { label: "Planos", href: "/#planos" },
+        { label: "Comparar planos", href: "/planos" },
       ],
     },
   ],

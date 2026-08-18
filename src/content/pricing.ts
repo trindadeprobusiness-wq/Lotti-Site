@@ -5,12 +5,10 @@ import {
   Users,
   QrCode,
   Sparkles,
-  MessageSquareText,
   HardDrive,
   Banknote,
   FileSignature,
   BarChart3,
-  ShieldCheck,
   Headphones,
 } from 'lucide-react';
 

@@ -5,9 +5,7 @@ import { Features } from "@/components/site/Features";
 import { Differentiators } from "@/components/site/Differentiators";
 import { HowItWorks } from "@/components/site/HowItWorks";
 import { Trust } from "@/components/site/Trust";
-import { PricingHero } from "@/components/site/pricing/PricingHero";
-import { PricingCards } from "@/components/site/pricing/PricingCards";
-import { PricingFAQ } from "@/components/site/pricing/PricingFAQ";
+import { Plans } from "@/components/site/Plans";
 import { FinalCta } from "@/components/site/FinalCta";
 import { Footer } from "@/components/site/Footer";
 import { StructuredData } from "@/components/site/StructuredData";
@@ -24,11 +22,7 @@ export default function Page() {
         <Differentiators />
         <HowItWorks />
         <Trust />
-        <div id="planos">
-          <PricingHero />
-          <PricingCards />
-          <PricingFAQ />
-        </div>
+        <Plans />
         <FinalCta />
       </main>
       <Footer />

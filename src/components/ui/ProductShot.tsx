@@ -9,13 +9,20 @@ import {
 } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { LottiMark } from "@/components/brand/LottiMark";
+import { ProductVideo } from "@/components/ui/ProductVideo";
 
 type ProductShotProps = {
   /** Caminho dentro de public/product/, ex.: "/product/funil.png" */
   src: string;
+  /** Vídeo de demonstração exibido dentro da mesma moldura do produto. */
+  videoSrc?: string;
+  /** Exibe este print real mesmo enquanto os outros quadros usam o placeholder. */
+  showScreenshot?: boolean;
+  /** Define se o print ocupa todo o quadro ou aparece por inteiro. */
+  imageFit?: "cover" | "contain";
   alt: string;
   /** Proporção do print. Mantenha igual à do arquivo para não gerar CLS. */
-  aspect?: "16/10" | "4/3";
+  aspect?: string;
   /** Só no print do hero — ele é o LCP. */
   priority?: boolean;
   sizes?: string;
@@ -32,6 +39,9 @@ type ProductShotProps = {
  */
 export function ProductShot({
   src,
+  videoSrc,
+  showScreenshot = false,
+  imageFit = "cover",
   alt,
   aspect = "16/10",
   priority = false,
@@ -48,7 +58,9 @@ export function ProductShot({
         .join(" ")}
       style={{ aspectRatio: aspect.replace("/", " / ") }}
     >
-      {siteConfig.useProductScreenshots ? (
+      {videoSrc ? (
+        <ProductVideo src={videoSrc} alt={alt} />
+      ) : showScreenshot || siteConfig.useProductScreenshots ? (
         <Image
           src={src}
           alt={alt}
@@ -56,7 +68,7 @@ export function ProductShot({
           sizes={sizes}
           priority={priority}
           loading={priority ? undefined : "lazy"}
-          className="object-cover object-top"
+          className={imageFit === "contain" ? "object-contain" : "object-cover object-top"}
         />
       ) : (
         // O quadro 16/10 é bem mais alto: ganha uma faixa de funil embaixo

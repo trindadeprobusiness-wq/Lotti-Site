@@ -460,6 +460,13 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
+
+  .text-gradient-forest {
+    background: linear-gradient(to right, #093323, #000000);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
   
   .on-ink .text-gradient {
     background: linear-gradient(to right, var(--color-paper), color-mix(in srgb, var(--color-paper) 60%, transparent));

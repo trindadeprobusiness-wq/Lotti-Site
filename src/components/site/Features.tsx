@@ -3,17 +3,24 @@ import { ProductShot } from "@/components/ui/ProductShot";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { features } from "@/content/landing";
-import { ScanBridge } from "./ScanBridge";
 
 const primaryVisuals = [
   <ProductShot
     key="funil"
-    src="/product/funil.png"
+    src="/product/funil-etapas.png"
     alt="Funil de vendas em Kanban, com negócios distribuídos por etapa"
-    aspect="4/3"
+    aspect="1608/857"
+    showScreenshot
     sizes="(max-width: 1024px) 100vw, 46vw"
   />,
-  <ScanBridge key="fachadas" />,
+  <ProductShot
+    key="fachadas"
+    src="/product/fachadas-qr.png"
+    alt="Painel de Fachadas Inteligentes com métricas e QR Code em atividade"
+    aspect="1601/868"
+    showScreenshot
+    sizes="(max-width: 1024px) 100vw, 46vw"
+  />,
 ];
 
 /** Ícone modular + nome do módulo. Sem a régua diagonal: o ícone já ancora. */

@@ -21,8 +21,13 @@ export function TextReveal({
   const ref = useRef<HTMLElement>(null);
   const visible = useRevealOnce(ref);
   const words = text.split(" ");
-  const isGradient = className.includes("text-gradient");
-  const outerClassName = className.replace("text-gradient", "").trim();
+  const gradientClassName = className
+    .split(" ")
+    .find((item) => item.startsWith("text-gradient"));
+  const outerClassName = className
+    .split(" ")
+    .filter((item) => item !== gradientClassName)
+    .join(" ");
 
   return (
     <Tag ref={ref as never} className={outerClassName} aria-label={text}>
@@ -36,7 +41,7 @@ export function TextReveal({
           >
             <span
               className={`inline-block transition-[opacity,transform] duration-[800ms] ${
-                isGradient ? "text-gradient" : ""
+                gradientClassName ?? ""
               }`}
               style={{
                 opacity: visible ? 1 : 0,

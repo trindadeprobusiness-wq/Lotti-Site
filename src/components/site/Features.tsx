@@ -15,9 +15,9 @@ const primaryVisuals = [
   />,
   <ProductShot
     key="fachadas"
-    src="/product/fachadas-qr.png"
+    src="/product/fachadas-qr-atual.png"
     alt="Painel de Fachadas Inteligentes com métricas e QR Code em atividade"
-    aspect="1601/868"
+    aspect="1901/866"
     showScreenshot
     sizes="(max-width: 1024px) 100vw, 46vw"
   />,
@@ -59,7 +59,7 @@ export function Features() {
               >
                 <div className={flip ? "lg:order-2" : undefined}>
                   <FeatureLabel icon={Icon} label={feature.label} />
-                  <h3 className="mt-5 max-w-[20ch] text-h2 text-balance">
+                  <h3 className="mt-5 max-w-[20ch] text-h2 text-balance leading-[1.15] pt-1">
                     {feature.title}
                   </h3>
                   <p className="mt-4 max-w-[52ch] text-muted">{feature.description}</p>

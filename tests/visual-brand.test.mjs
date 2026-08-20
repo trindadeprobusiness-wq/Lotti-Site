@@ -154,11 +154,12 @@ test("exibe a captura real do app no recurso de fachadas", async () => {
   const { response, body } = await get("/");
 
   assert.equal(response.status, 200);
-  assert.match(body, /<img[^>]+fachadas-qr\.png/);
-  assert.match(body, /<img(?=[^>]+fachadas-qr\.png)(?=[^>]+object-cover)/);
-  assert.match(body, /aspect-ratio:1601 \/ 868/);
+  assert.match(body, /<img[^>]+fachadas-qr-atual\.png/);
+  assert.match(body, /<img(?=[^>]+fachadas-qr-atual\.png)(?=[^>]+object-cover)/);
+  assert.match(body, /aspect-ratio:1901 \/ 866/);
+  assert.match(body, /leading-\[1\.15\] pt-1/);
 
-  const image = await fetch(`${baseUrl}/product/fachadas-qr.png`, { method: "HEAD" });
+  const image = await fetch(`${baseUrl}/product/fachadas-qr-atual.png`, { method: "HEAD" });
   assert.equal(image.status, 200);
   assert.match(image.headers.get("content-type") ?? "", /image\/png/);
 });
@@ -191,4 +192,13 @@ test("mantém o selo do plano destacado fora da camada que recorta o efeito", as
     body,
     /data-pricing-beam=""[^>]*class="[^"]*border-beam-wrapper/,
   );
+});
+
+test("mantém o seletor de planos próximo do título da seção", async () => {
+  const pricingCards = await readFile(
+    new URL("../src/components/site/pricing/PricingCards.tsx", import.meta.url),
+    "utf8",
+  );
+
+  assert.match(pricingCards, /<section className="section pt-0 pb-16">/);
 });

@@ -10,7 +10,7 @@ export function PricingCards() {
   const [isAnnual, setIsAnnual] = useState(false);
 
   return (
-    <section className="section pb-16">
+    <section className="section pt-0 pb-16">
       <div className="shell">
         <Reveal className="mb-12 flex flex-col items-center justify-center gap-4">
           <div className="flex items-center gap-3 rounded-full border border-line bg-surface p-1">

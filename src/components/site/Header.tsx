@@ -58,7 +58,7 @@ export function Header() {
             <a
               key={item.href}
               href={item.href}
-              className="link-underline text-small font-medium text-muted transition-colors hover:text-ink"
+              className="link-underline text-small font-medium text-muted transition-colors hover:text-forest"
             >
               {item.label}
             </a>

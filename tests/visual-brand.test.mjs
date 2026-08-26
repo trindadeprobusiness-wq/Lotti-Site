@@ -194,6 +194,17 @@ test("mantém o selo do plano destacado fora da camada que recorta o efeito", as
   );
 });
 
+test("usa o símbolo oficial da Lotti no ícone da aba", async () => {
+  const icon = await readFile(
+    new URL("../src/app/icon.svg", import.meta.url),
+    "utf8",
+  );
+
+  assert.match(icon, /M124\.5 74\.5L0 187\.5/);
+  assert.match(icon, /stop-color="#093323"/);
+  assert.match(icon, /stop-color="#000000"/);
+});
+
 test("mantém o seletor de planos próximo do título da seção", async () => {
   const pricingCards = await readFile(
     new URL("../src/components/site/pricing/PricingCards.tsx", import.meta.url),
@@ -201,4 +212,35 @@ test("mantém o seletor de planos próximo do título da seção", async () => {
   );
 
   assert.match(pricingCards, /<section className="section pt-0 pb-16">/);
+});
+
+test("usa o verde Lotti como acento em ações e progresso", async () => {
+  const styles = await readFile(
+    new URL("../src/app/globals.css", import.meta.url),
+    "utf8",
+  );
+  const header = await readFile(
+    new URL("../src/components/site/Header.tsx", import.meta.url),
+    "utf8",
+  );
+  const steps = await readFile(
+    new URL("../src/components/site/HowItWorks.tsx", import.meta.url),
+    "utf8",
+  );
+
+  assert.match(styles, /--color-forest: #093323/);
+  assert.match(
+    styles,
+    /\.btn-primary\s*\{\s*background: linear-gradient\(to right, var\(--color-forest\), var\(--color-ink\)\)/,
+  );
+  assert.match(
+    styles,
+    /\.eyebrow::before\s*\{[^}]*background: linear-gradient\(to right, var\(--color-forest\), var\(--color-ink\)\)/,
+  );
+  assert.match(
+    styles,
+    /\.link-underline::after\s*\{[^}]*background: linear-gradient\(to right, var\(--color-forest\), var\(--color-ink\)\)/,
+  );
+  assert.match(header, /hover:text-forest/);
+  assert.match(steps, /text-eyebrow uppercase text-forest/);
 });

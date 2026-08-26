@@ -33,7 +33,7 @@ export function HowItWorks() {
             >
               <span
                 data-numeric
-                className="text-eyebrow uppercase text-muted"
+                className="text-eyebrow uppercase text-forest"
               >
                 {String(index + 1).padStart(2, "0")}
               </span>

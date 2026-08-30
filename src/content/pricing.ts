@@ -4,8 +4,6 @@ import {
   Rocket,
   Users,
   QrCode,
-  Sparkles,
-  HardDrive,
   Banknote,
   FileSignature,
   BarChart3,
@@ -40,17 +38,14 @@ export const plansData = [
     highlighted: false,
     cta: 'Começar teste gratuito',
     features: [
-      'Dashboard principal',
-      'Cadastro de clientes e imóveis',
-      'Funil de vendas Kanban',
-      'Tarefas, lembretes e follow-ups',
-      'Controle financeiro básico',
-      'Mensagens personalizadas para WhatsApp',
-      '10 contratos com IA / mês',
+      'Até 5 imóveis ativos',
+      'Até 5 contratos de aluguel ativos',
       '5 Fachadas Inteligentes',
-      'Landing pages dos imóveis',
-      'Tema claro e escuro',
-      'Suporte padrão',
+      '10 gerações ou análises de contrato com IA por mês',
+      'CRM, clientes, funil e lançamentos financeiros sem limite',
+      'Integração com Asaas',
+      'Financeiro básico',
+      'Suporte por e-mail',
     ],
   },
   {
@@ -63,20 +58,15 @@ export const plansData = [
     highlighted: true,
     cta: 'Começar teste gratuito',
     features: [
-      'Tudo do Essencial, mais:',
-      'Até 2 usuários',
-      'Controle financeiro completo',
-      'Gestão de comissões e projeção anual',
-      'Gestão completa de aluguéis',
+      'Até 20 imóveis ativos',
+      'Até 15 contratos de aluguel ativos',
+      '20 Fachadas Inteligentes',
+      '20 gerações ou análises de contrato com IA por mês',
+      'CRM, clientes, funil e lançamentos financeiros sem limite',
+      'Financeiro completo',
+      'Gestão de aluguéis',
       'Integração com Asaas',
-      '60 contratos com IA / mês',
-      'Análise de contratos existentes',
-      'Exportação PDF e DOCX',
-      'Assistente de IA integrado ao CRM',
-      '25 Fachadas Inteligentes',
-      'Métricas detalhadas de Fachadas',
-      'Relatórios comerciais e financeiros',
-      'Automações e alertas',
+      'Relatórios e automações',
       'Suporte prioritário',
     ],
   },
@@ -91,19 +81,13 @@ export const plansData = [
     cta: 'Começar teste gratuito',
     secondaryCta: 'Falar com especialista',
     features: [
-      'Tudo do Profissional, mais:',
-      'Até 10 usuários',
-      'Imóveis ilimitados',
-      'Gestão completa de equipe',
-      'Perfis e permissões (admin, gestor, corretor)',
-      'Distribuição de leads',
-      'Indicadores por corretor e ranking',
-      '250 contratos com IA / mês',
+      'Até 100 imóveis ativos',
+      'Até 100 contratos de aluguel ativos',
       '100 Fachadas Inteligentes',
-      'Relatórios avançados com exportação',
-      'Histórico de auditoria',
-      'Atendimento prioritário',
+      '60 gerações ou análises de contrato com IA por mês',
+      'CRM, clientes, funil e lançamentos financeiros sem limite',
       'Onboarding orientado',
+      'Suporte prioritário',
     ],
   },
 ];
@@ -113,56 +97,40 @@ export const comparisonCategories = [
   { key: 'imoveis', label: 'Imóveis e proprietários', icon: Building2 },
   { key: 'fachadas', label: 'Fachadas Inteligentes', icon: QrCode },
   { key: 'contratos', label: 'Contratos e documentos', icon: FileSignature },
-  { key: 'ia', label: 'Inteligência artificial', icon: Sparkles },
   { key: 'financeiro', label: 'Financeiro', icon: Banknote },
   { key: 'alugueis', label: 'Gestão de aluguéis', icon: Banknote },
-  { key: 'equipe', label: 'Equipe e permissões', icon: Users },
   { key: 'relatorios', label: 'Relatórios', icon: BarChart3 },
-  { key: 'midias', label: 'Mídias', icon: HardDrive },
   { key: 'suporte', label: 'Suporte', icon: Headphones },
 ];
 
 export const comparisonFeatures = [
-  // Equipe
-  { category: 'equipe', label: 'Usuários incluídos', essencial: '1', profissional: '2', imobiliaria: '10' },
-  { category: 'equipe', label: 'Gestão de equipe e permissões', essencial: false, profissional: false, imobiliaria: true },
-  { category: 'equipe', label: 'Indicadores por corretor', essencial: false, profissional: false, imobiliaria: true },
-  
   // Imoveis
-  { category: 'imoveis', label: 'Imóveis ativos', essencial: '100', profissional: '500', imobiliaria: 'Ilimitado' },
+  { category: 'imoveis', label: 'Imóveis ativos', essencial: '5', profissional: '20', imobiliaria: '100' },
   
   // Fachadas
-  { category: 'fachadas', label: 'Fachadas Inteligentes ativas', essencial: '5', profissional: '25', imobiliaria: '100' },
-  { category: 'fachadas', label: 'Métricas detalhadas', essencial: false, profissional: true, imobiliaria: true },
+  { category: 'fachadas', label: 'Fachadas Inteligentes ativas', essencial: '5', profissional: '20', imobiliaria: '100' },
   
   // Contratos
-  { category: 'contratos', label: 'Geração de contratos com IA', essencial: '10/mês', profissional: '60/mês', imobiliaria: '250/mês' },
-  { category: 'contratos', label: 'Análise de PDFs com IA', essencial: false, profissional: true, imobiliaria: true },
-  { category: 'contratos', label: 'Exportação PDF/DOCX', essencial: false, profissional: true, imobiliaria: true },
+  { category: 'contratos', label: 'Contratos de aluguel ativos', essencial: '5', profissional: '15', imobiliaria: '100' },
+  { category: 'contratos', label: 'Gerações ou análises com IA', essencial: '10/mês', profissional: '20/mês', imobiliaria: '60/mês' },
   
   // Alugueis
-  { category: 'alugueis', label: 'Gestão completa de aluguéis', essencial: false, profissional: true, imobiliaria: true },
-  { category: 'alugueis', label: 'Integração Asaas (cobranças)', essencial: false, profissional: true, imobiliaria: true },
-  
-  // IA
-  { category: 'ia', label: 'Interações com Assistente', essencial: '30/mês', profissional: '300/mês', imobiliaria: '1.500/mês' },
+  { category: 'alugueis', label: 'Gestão de aluguéis', essencial: false, profissional: true, imobiliaria: true },
+  { category: 'alugueis', label: 'Integração Asaas (cobranças)', essencial: true, profissional: true, imobiliaria: true },
   
   // CRM
-  { category: 'crm', label: 'Funil e Follow-ups', essencial: true, profissional: true, imobiliaria: true },
-  { category: 'crm', label: 'Automações e alertas inteligentes', essencial: false, profissional: true, imobiliaria: true },
+  { category: 'crm', label: 'CRM, clientes e funil', essencial: 'Sem limite', profissional: 'Sem limite', imobiliaria: 'Sem limite' },
   
   // Financeiro
   { category: 'financeiro', label: 'Financeiro básico', essencial: true, profissional: true, imobiliaria: true },
-  { category: 'financeiro', label: 'Financeiro completo (comissões)', essencial: false, profissional: true, imobiliaria: true },
+  { category: 'financeiro', label: 'Lançamentos financeiros', essencial: 'Sem limite', profissional: 'Sem limite', imobiliaria: 'Sem limite' },
+  { category: 'financeiro', label: 'Financeiro completo', essencial: false, profissional: true, imobiliaria: true },
   
   // Relatorios
-  { category: 'relatorios', label: 'Relatórios avançados', essencial: false, profissional: true, imobiliaria: true },
-  
-  // Midias
-  { category: 'midias', label: 'Armazenamento de mídias', essencial: '5 GB', profissional: '25 GB', imobiliaria: '100 GB' },
+  { category: 'relatorios', label: 'Relatórios e automações', essencial: false, profissional: true, imobiliaria: true },
   
   // Suporte
-  { category: 'suporte', label: 'Suporte', essencial: 'Padrão', profissional: 'Prioritário', imobiliaria: 'Prioritário' },
+  { category: 'suporte', label: 'Suporte', essencial: 'Por e-mail', profissional: 'Prioritário', imobiliaria: 'Prioritário' },
   { category: 'suporte', label: 'Onboarding orientado', essencial: false, profissional: false, imobiliaria: true },
 ];
 

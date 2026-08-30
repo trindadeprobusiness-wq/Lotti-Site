@@ -194,6 +194,26 @@ test("mantém o selo do plano destacado fora da camada que recorta o efeito", as
   );
 });
 
+test("apresenta os limites comerciais revisados nos três planos", async () => {
+  const { response, body } = await get("/planos");
+
+  assert.equal(response.status, 200);
+  for (const content of [
+    "Até 5 imóveis ativos",
+    "Até 5 contratos de aluguel ativos",
+    "10 gerações ou análises de contrato com IA por mês",
+    "Suporte por e-mail",
+    "Até 20 imóveis ativos",
+    "Até 15 contratos de aluguel ativos",
+    "20 Fachadas Inteligentes",
+    "Até 100 imóveis ativos",
+    "Até 100 contratos de aluguel ativos",
+    "60 gerações ou análises de contrato com IA por mês",
+  ]) {
+    assert.ok(body.includes(content), `faltando conteúdo do plano: ${content}`);
+  }
+});
+
 test("usa o símbolo oficial da Lotti no ícone da aba", async () => {
   const icon = await readFile(
     new URL("../src/app/icon.svg", import.meta.url),

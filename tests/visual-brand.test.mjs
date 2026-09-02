@@ -25,13 +25,38 @@ test("serve as duas assinaturas lineares oficiais", async () => {
   assert.match(light.body, /stop-color="white"|stop-color="#ffffff"/i);
 });
 
-test("renderiza a assinatura correta em fundos claros e escuros", async () => {
+test("renderiza a assinatura oficial legível no cabeçalho escuro", async () => {
   const { response, body } = await get("/");
 
   assert.equal(response.status, 200);
-  assert.match(body, /\/brand\/lotti-linear-dark\.svg/);
   assert.match(body, /\/brand\/lotti-white\.svg/);
   assert.match(body, /<title>Lotti<\/title>/);
+});
+
+test("mantém o cabeçalho Lotti em uma cápsula responsiva e animada", async () => {
+  const header = await readFile(
+    new URL("../src/components/site/Header.tsx", import.meta.url),
+    "utf8",
+  );
+  const styles = await readFile(
+    new URL("../src/app/globals.css", import.meta.url),
+    "utf8",
+  );
+
+  assert.match(header, /data-site-header=""/);
+  assert.match(header, /data-header-open=\{open \? "true" : "false"\}/);
+  assert.match(header, /data-mobile-nav=""/);
+  assert.match(header, /data-menu-toggle=""/);
+  assert.equal(header.match(/data-menu-line=""/g)?.length, 2);
+  assert.match(header, /<Logo tone="paper"/);
+  assert.match(styles, /\.site-header-shell[\s\S]*border-radius: 1\.35rem/);
+  assert.match(styles, /\.site-mobile-menu[\s\S]*grid-template-rows: 0fr/);
+  assert.match(
+    styles,
+    /\.site-header-shell\.is-open \.site-mobile-menu[\s\S]*grid-template-rows: 1fr/,
+  );
+  assert.match(styles, /\.site-header-shell\.is-open \.site-menu-line-top[\s\S]*rotate\(45deg\)/);
+  assert.match(styles, /@media \(min-width: 64rem\)[\s\S]*\.site-header-desktop-nav/);
 });
 
 test("não exibe vídeo no hero", async () => {
@@ -196,21 +221,22 @@ test("mantém o selo do plano destacado fora da camada que recorta o efeito", as
 
 test("apresenta os limites comerciais revisados nos três planos", async () => {
   const { response, body } = await get("/planos");
+  const renderedText = body.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ");
 
   assert.equal(response.status, 200);
   for (const content of [
-    "Até 5 imóveis ativos",
-    "Até 5 contratos de aluguel ativos",
-    "10 gerações ou análises de contrato com IA por mês",
+    "Imóveis ativos Até 5",
+    "Contratos de aluguel ativos Até 5",
+    "Gerações ou análises com IA 10/mês",
     "Suporte por e-mail",
-    "Até 20 imóveis ativos",
-    "Até 15 contratos de aluguel ativos",
-    "20 Fachadas Inteligentes",
-    "Até 100 imóveis ativos",
-    "Até 100 contratos de aluguel ativos",
-    "60 gerações ou análises de contrato com IA por mês",
+    "Imóveis ativos Até 20",
+    "Contratos de aluguel ativos Até 15",
+    "Fachadas Inteligentes 20",
+    "Imóveis ativos Até 100",
+    "Contratos de aluguel ativos Até 100",
+    "Gerações ou análises com IA 60/mês",
   ]) {
-    assert.ok(body.includes(content), `faltando conteúdo do plano: ${content}`);
+    assert.ok(renderedText.includes(content), `faltando conteúdo do plano: ${content}`);
   }
 });
 
@@ -225,7 +251,7 @@ test("usa o símbolo oficial da Lotti no ícone da aba", async () => {
   assert.match(icon, /stop-color="#000000"/);
 });
 
-test("mantém o seletor de planos próximo do título da seção", async () => {
+test("mantém a indicação de cobrança mensal próxima dos planos", async () => {
   const pricingCards = await readFile(
     new URL("../src/components/site/pricing/PricingCards.tsx", import.meta.url),
     "utf8",
@@ -237,10 +263,6 @@ test("mantém o seletor de planos próximo do título da seção", async () => {
 test("usa o verde Lotti como acento em ações e progresso", async () => {
   const styles = await readFile(
     new URL("../src/app/globals.css", import.meta.url),
-    "utf8",
-  );
-  const header = await readFile(
-    new URL("../src/components/site/Header.tsx", import.meta.url),
     "utf8",
   );
   const steps = await readFile(
@@ -261,6 +283,78 @@ test("usa o verde Lotti como acento em ações e progresso", async () => {
     styles,
     /\.link-underline::after\s*\{[^}]*background: linear-gradient\(to right, var\(--color-forest\), var\(--color-ink\)\)/,
   );
-  assert.match(header, /hover:text-forest/);
+  assert.match(
+    styles,
+    /\.checkout-progress \.is-current span,[\s\S]*?background: var\(--color-forest\)/,
+  );
   assert.match(steps, /text-eyebrow uppercase text-forest/);
+});
+
+test("leva cada plano mensal para o checkout", async () => {
+  const { response, body } = await get("/planos");
+
+  assert.equal(response.status, 200);
+  assert.match(body, /\/checkout\?plano=essencial/);
+  assert.match(body, /\/checkout\?plano=profissional/);
+  assert.match(body, /\/checkout\?plano=imobiliaria/);
+  assert.match(body, />Assinar agora</);
+  assert.match(body, /Até 5/);
+  assert.match(body, /Até 20/);
+  assert.match(body, /Até 100/);
+  assert.doesNotMatch(body, /Faturado .* por ano|Economize 2 meses|Teste grátis por 14 dias/);
+});
+
+test("renderiza cartão à esquerda e Pix anual com 12 mensalidades", async () => {
+  const { response, body } = await get("/checkout?plano=profissional");
+
+  assert.equal(response.status, 200);
+  assert.match(body, /Ambiente de pagamento seguro/);
+  assert.match(body, /Lotti Profissional/);
+  assert.match(body, /Pix/);
+  assert.match(body, /Cartão/);
+  assert.ok(body.indexOf("<strong>Cartão</strong>") < body.indexOf("<strong>Pix</strong>"));
+  assert.match(body, /12 meses em um pagamento/);
+  assert.match(body, /referente a 12 meses de/);
+  assert.match(body, /R\$\s*1\.788,00/);
+  assert.match(body, /R\$\s*149,00/);
+  assert.match(body, /único endereço autorizado a criar a senha inicial/);
+  assert.match(body, /Processado com segurança pelo Asaas/);
+  assert.match(body, /Até 20 imóveis e 15 contratos de aluguel ativos/);
+  assert.match(body, /20 Fachadas Inteligentes/);
+  assert.match(body, /renovação anual/i);
+  assert.doesNotMatch(body, /Card Holder|Expiration Date|Complete all fields/);
+});
+
+test("mantém segredos e cartão fora do cliente e da persistência", async () => {
+  const checkoutRoute = await readFile(
+    new URL("../src/app/api/checkout/route.ts", import.meta.url),
+    "utf8",
+  );
+  const repository = await readFile(
+    new URL("../src/lib/checkout/repository.ts", import.meta.url),
+    "utf8",
+  );
+  const migration = await readFile(
+    new URL("../supabase/migrations/20260826090000_asaas_saas_checkout.sql", import.meta.url),
+    "utf8",
+  );
+  const asaasServer = await readFile(
+    new URL("../src/lib/asaas/server.ts", import.meta.url),
+    "utf8",
+  );
+  const provisioning = await readFile(
+    new URL("../src/lib/checkout/provisioning.ts", import.meta.url),
+    "utf8",
+  );
+
+  assert.doesNotMatch(checkoutRoute, /NEXT_PUBLIC_(ASAAS|SUPABASE_SECRET|SUPABASE_SERVICE)/);
+  const sensitiveColumn = /^\s*(card_number|credit_card_number|cvv|ccv)\s+/im;
+  assert.doesNotMatch(repository, sensitiveColumn);
+  assert.doesNotMatch(migration, sensitiveColumn);
+  assert.match(migration, /ENABLE ROW LEVEL SECURITY/);
+  assert.match(migration, /claim_asaas_checkout_event/);
+  assert.match(migration, /claim_checkout_order_provisioning/);
+  assert.match(migration, /REVOKE ALL ON TABLE public\.checkout_orders FROM PUBLIC, anon, authenticated/);
+  assert.match(asaasServer, /input\.billingCycle === "annual" \? "YEARLY" : "MONTHLY"/);
+  assert.match(provisioning, /cycle === "annual" \? 12 : 1/);
 });

@@ -229,9 +229,9 @@ export const plans = {
   title: "Tudo o que sua operação precisa.",
   lead: "Organize clientes, imóveis, contratos, finanças, aluguéis e oportunidades em uma plataforma criada para o mercado imobiliário. Escolha o plano ideal para o tamanho do seu negócio.",
   points: [
-    "Teste grátis por 14 dias sem cartão.",
-    "Planos que acompanham seu crescimento.",
-    "Desconto de 2 meses no ciclo anual.",
+    "Valores mensais claros.",
+    "Limites definidos por faixa de operação.",
+    "Pagamento por Pix ou cartão.",
   ],
   cta: "Ver planos e preços",
 } as const;

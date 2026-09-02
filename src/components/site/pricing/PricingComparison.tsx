@@ -21,7 +21,8 @@ export function PricingComparison() {
         <Reveal>
           <SectionHeading
             eyebrow="Comparação"
-            title="Compare os planos em detalhes."
+            title="Compare os limites e o atendimento."
+            lead="Os números abaixo são os limites mensais oficiais de cada plano."
             align="center"
           />
 

@@ -9,7 +9,7 @@ import { PricingFAQ } from "@/components/site/pricing/PricingFAQ";
 export const metadata: Metadata = {
   title: "Planos e Preços",
   description:
-    "Compare os planos da Lotti: Essencial, Profissional e Imobiliária. CRM imobiliário com IA, funil de vendas, contratos por IA e gestão de aluguéis. Teste grátis por 14 dias.",
+    "Compare os planos mensais da Lotti: Essencial por R$ 99, Profissional por R$ 149 e Imobiliária por R$ 299.",
   alternates: { canonical: "/planos" },
 };
 

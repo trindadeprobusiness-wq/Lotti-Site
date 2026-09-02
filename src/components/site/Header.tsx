@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
 import { Logo } from "@/components/brand/Logo";
 import { Button } from "@/components/ui/Button";
 import { hero, nav } from "@/content/landing";
@@ -34,71 +33,42 @@ export function Header() {
     };
   }, [open]);
 
+  useEffect(() => {
+    const desktop = window.matchMedia("(min-width: 64rem)");
+    const closeOnDesktop = () => {
+      if (desktop.matches) setOpen(false);
+    };
+
+    desktop.addEventListener("change", closeOnDesktop);
+    return () => desktop.removeEventListener("change", closeOnDesktop);
+  }, []);
+
   return (
-    <header
-      className={[
-        "fixed inset-x-0 top-0 z-50 transition-colors duration-300",
-        scrolled || open
-          ? "border-b border-line bg-paper"
-          : "border-b border-transparent bg-paper/80 backdrop-blur-sm",
-      ].join(" ")}
-      style={{ height: "var(--header-h)" }}
-    >
-      <div className="shell flex h-full items-center justify-between gap-6">
-        <a
-          href="#topo"
-          aria-label={`${"Lotti"} - início da página`}
-          className="-m-2 rounded-md p-2"
-        >
-          <Logo size={24} />
-        </a>
-
-        <nav aria-label="Seções do site" className="hidden items-center gap-9 lg:flex">
-          {nav.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className="link-underline text-small font-medium text-muted transition-colors hover:text-forest"
-            >
-              {item.label}
-            </a>
-          ))}
-        </nav>
-
-        <div className="flex items-center gap-2">
-          <Button href="#demo" className="hidden lg:inline-flex">
-            {hero.primaryCta}
-          </Button>
-
-          <button
-            type="button"
-            className="-m-2 rounded-md p-2 text-ink lg:hidden"
-            aria-expanded={open}
-            aria-controls="menu-mobile"
-            aria-label={open ? "Fechar menu" : "Abrir menu"}
-            onClick={() => setOpen((value) => !value)}
-          >
-            {open ? <X size={22} strokeWidth={2} /> : <Menu size={22} strokeWidth={2} />}
-          </button>
-        </div>
-      </div>
-
-      {/* Painel mobile */}
+    <header data-site-header="" className="site-header">
       <div
-        id="menu-mobile"
-        hidden={!open}
-        className="border-t border-line bg-paper lg:hidden"
-        style={{ height: "calc(100dvh - var(--header-h))" }}
+        data-header-open={open ? "true" : "false"}
+        data-header-scrolled={scrolled ? "true" : "false"}
+        className={[
+          "site-header-shell on-ink",
+          open ? "is-open" : "",
+          scrolled ? "is-scrolled" : "",
+        ]
+          .filter(Boolean)
+          .join(" ")}
       >
-        <div className="shell flex h-full flex-col justify-between py-8">
-          <nav aria-label="Seções do site" className="flex flex-col">
+        <div className="site-header-row">
+          <a
+            href="#topo"
+            aria-label="Lotti - início da página"
+            className="site-header-logo"
+            onClick={() => setOpen(false)}
+          >
+            <Logo tone="paper" size={18} />
+          </a>
+
+          <nav aria-label="Seções do site" className="site-header-desktop-nav">
             {nav.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                onClick={() => setOpen(false)}
-                className="border-b border-line py-5 text-h2 text-ink"
-              >
+              <a key={item.href} href={item.href} className="site-header-nav-link">
                 {item.label}
               </a>
             ))}
@@ -106,12 +76,65 @@ export function Header() {
 
           <Button
             href="#demo"
-            arrow
-            onClick={() => setOpen(false)}
-            className="w-full"
+            variant="inverted"
+            className="site-header-desktop-cta"
           >
             {hero.primaryCta}
           </Button>
+
+          <button
+            type="button"
+            data-menu-toggle=""
+            className="site-menu-toggle"
+            aria-expanded={open}
+            aria-controls="menu-mobile"
+            aria-label={open ? "Fechar menu" : "Abrir menu"}
+            onClick={() => setOpen((value) => !value)}
+          >
+            <span
+              data-menu-line=""
+              className="site-menu-line site-menu-line-top"
+              aria-hidden="true"
+            />
+            <span
+              data-menu-line=""
+              className="site-menu-line site-menu-line-bottom"
+              aria-hidden="true"
+            />
+          </button>
+        </div>
+
+        <div
+          id="menu-mobile"
+          data-mobile-nav=""
+          className="site-mobile-menu"
+          aria-hidden={!open}
+        >
+          <div className="site-mobile-menu-inner">
+            <nav aria-label="Seções do site" className="site-mobile-nav">
+              {nav.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  tabIndex={open ? 0 : -1}
+                  onClick={() => setOpen(false)}
+                  className="site-mobile-nav-link"
+                >
+                  {item.label}
+                </a>
+              ))}
+            </nav>
+
+            <Button
+              href="#demo"
+              variant="inverted"
+              tabIndex={open ? 0 : -1}
+              onClick={() => setOpen(false)}
+              className="site-mobile-cta"
+            >
+              {hero.primaryCta}
+            </Button>
+          </div>
         </div>
       </div>
     </header>

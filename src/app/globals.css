@@ -7,7 +7,7 @@
    ============================================================ */
 
 @theme {
-  /* Paleta — exatamente as 5 cores do manual */
+  /* Paleta institucional — o verde vem da assinatura oficial enviada. */
   --color-ink: #000000; /* Preto */
   --color-forest: #093323; /* Verde Lotti — ações e progresso */
   --color-paper: #ffffff; /* Branco */
@@ -51,6 +51,299 @@
   --radius-card: 12px;
 }
 
+@layer components {
+  .checkout-label {
+    display: block;
+    margin-bottom: 0.45rem;
+    color: var(--color-ink);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+  }
+
+  .checkout-input {
+    width: 100%;
+    min-height: 3.15rem;
+    border: 1px solid var(--color-line);
+    border-radius: 0.75rem;
+    background: var(--color-paper);
+    padding: 0.75rem 0.9rem;
+    color: var(--color-ink);
+    font: inherit;
+    font-size: 0.9rem;
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease,
+      background-color 0.2s ease;
+  }
+
+  .checkout-input::placeholder {
+    color: color-mix(in srgb, var(--color-muted) 72%, transparent);
+  }
+
+  .checkout-input:hover:not(:disabled) {
+    border-color: color-mix(in srgb, var(--color-forest) 38%, var(--color-line));
+  }
+
+  .checkout-input:focus {
+    border-color: var(--color-forest);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-forest) 11%, transparent);
+  }
+
+  .checkout-input[aria-invalid="true"] {
+    border-color: #b42318;
+    background-color: #fffafa;
+  }
+
+  .checkout-input:disabled {
+    cursor: not-allowed;
+    background: var(--color-surface);
+    color: var(--color-muted);
+  }
+
+  .checkout-error {
+    margin-top: 0.4rem;
+    color: #b42318;
+    font-size: 0.74rem;
+    line-height: 1.4;
+  }
+
+  .checkout-payment-option {
+    display: flex;
+    min-width: 0;
+    min-height: 4.25rem;
+    align-items: center;
+    gap: 0.75rem;
+    border: 1px solid var(--color-line);
+    border-radius: 0.9rem;
+    background: var(--color-paper);
+    padding: 0.8rem 0.9rem;
+    color: var(--color-muted);
+    text-align: left;
+    transition:
+      border-color 0.2s ease,
+      background-color 0.2s ease,
+      color 0.2s ease;
+  }
+
+  .checkout-payment-option:hover:not(:disabled) {
+    border-color: color-mix(in srgb, var(--color-forest) 45%, var(--color-line));
+  }
+
+  .checkout-payment-option.is-selected {
+    border-color: var(--color-forest);
+    background: color-mix(in srgb, var(--color-forest) 5%, var(--color-paper));
+    color: var(--color-forest);
+    box-shadow: inset 0 0 0 1px var(--color-forest);
+  }
+
+  .checkout-payment-option span {
+    display: grid;
+    min-width: 0;
+  }
+
+  .checkout-payment-option strong {
+    color: var(--color-ink);
+    font-size: 0.86rem;
+    line-height: 1.25;
+  }
+
+  .checkout-payment-option small {
+    margin-top: 0.15rem;
+    font-size: 0.68rem;
+    line-height: 1.25;
+  }
+
+  .checkout-progress {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    color: var(--color-muted);
+    font-size: 0.72rem;
+    font-weight: 600;
+  }
+
+  .checkout-progress li {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    white-space: nowrap;
+  }
+
+  .checkout-progress li:not(:last-child)::after {
+    content: "";
+    width: clamp(1rem, 3vw, 2.5rem);
+    height: 1px;
+    margin-inline: 0.55rem;
+    background: var(--color-line);
+  }
+
+  .checkout-progress span {
+    display: inline-flex;
+    width: 1.55rem;
+    height: 1.55rem;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--color-line);
+    border-radius: 999px;
+    background: var(--color-paper);
+    font-size: 0.67rem;
+  }
+
+  .checkout-progress .is-current,
+  .checkout-progress .is-complete {
+    color: var(--color-forest);
+  }
+
+  .checkout-progress .is-current span,
+  .checkout-progress .is-complete span {
+    border-color: var(--color-forest);
+    background: var(--color-forest);
+    color: var(--color-paper);
+  }
+
+  .checkout-credit-card {
+    width: 100%;
+    aspect-ratio: 1.586 / 1;
+    perspective: 1100px;
+  }
+
+  .checkout-credit-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .checkout-credit-card.is-flipped .checkout-credit-card-inner {
+    transform: rotateY(180deg);
+  }
+
+  .checkout-credit-card-face {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    border: 1px solid color-mix(in srgb, var(--color-paper) 14%, transparent);
+    border-radius: 1.35rem;
+    background:
+      radial-gradient(circle at 86% 12%, rgba(255, 255, 255, 0.13), transparent 30%),
+      linear-gradient(135deg, #0d4633 0%, var(--color-forest) 55%, #041b13 100%);
+    box-shadow: 0 24px 55px rgba(9, 51, 35, 0.24);
+    color: var(--color-paper);
+    backface-visibility: hidden;
+  }
+
+  .checkout-credit-card-front {
+    padding: clamp(1.1rem, 4.2vw, 1.6rem);
+  }
+
+  .checkout-credit-card-back {
+    transform: rotateY(180deg);
+  }
+
+  .checkout-card-blades {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    opacity: 0.7;
+  }
+
+  .checkout-card-blades span {
+    position: absolute;
+    width: 3.6rem;
+    height: 145%;
+    top: -22%;
+    border-radius: 1.2rem;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.015));
+    transform: rotate(39deg);
+  }
+
+  .checkout-card-blades span:nth-child(1) { right: 8%; }
+  .checkout-card-blades span:nth-child(2) { right: 30%; }
+  .checkout-card-blades span:nth-child(3) { right: 52%; opacity: 0.55; }
+
+  .checkout-card-number {
+    width: fit-content;
+    border: 1px solid transparent;
+    border-radius: 0.55rem;
+    padding: 0.3rem 0.4rem;
+    font-size: clamp(1rem, 4.4vw, 1.35rem);
+    font-weight: 500;
+    letter-spacing: 0.075em;
+    line-height: 1.15;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.18);
+    transition:
+      border-color 0.2s ease,
+      background-color 0.2s ease;
+  }
+
+  .checkout-card-number.is-focused,
+  .checkout-card-detail.is-focused {
+    border-color: rgba(255, 255, 255, 0.48);
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .checkout-card-detail {
+    min-width: 0;
+    border: 1px solid transparent;
+    border-radius: 0.5rem;
+    padding: 0.25rem 0.35rem;
+    transition:
+      border-color 0.2s ease,
+      background-color 0.2s ease;
+  }
+
+  .checkout-card-detail span {
+    display: block;
+    margin-bottom: 0.2rem;
+    color: rgba(255, 255, 255, 0.58);
+    font-size: 0.56rem;
+    font-weight: 600;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+  }
+
+  .checkout-card-detail strong {
+    display: block;
+    max-width: 18ch;
+    overflow: hidden;
+    color: var(--color-paper);
+    font-size: clamp(0.64rem, 2.5vw, 0.76rem);
+    font-weight: 600;
+    letter-spacing: 0.045em;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  @media (max-width: 40rem) {
+    .checkout-progress li {
+      gap: 0;
+      font-size: 0;
+    }
+
+    .checkout-progress li:not(:last-child)::after {
+      margin-inline: 0.35rem;
+    }
+
+    .checkout-payment-option {
+      align-items: flex-start;
+      padding: 0.75rem;
+    }
+
+    .checkout-payment-option small {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .checkout-credit-card-inner {
+      transition: none;
+    }
+  }
+}
+
 :root {
   /* A lâmina — o único ângulo da página.
      --blade-angle é a inclinação real da aresta em relação à horizontal.
@@ -60,7 +353,7 @@
   --blade-angle: 62deg;
   --blade-skew: -28deg;
 
-  --header-h: 4.5rem;
+  --header-h: 5.75rem;
 }
 
 /* Keyframes ficam no root do arquivo, fora de @layer.
@@ -151,6 +444,243 @@
 }
 
 @layer components {
+  /* Cabeçalho-cápsula: a mesma superfície se abre no mobile e permanece
+     horizontal no desktop. A animação pertence à peça, não a um modal solto. */
+  .site-header {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 50;
+    height: var(--header-h);
+    padding: 0.75rem;
+    pointer-events: none;
+  }
+
+  .site-header-shell {
+    width: min(100%, 62rem);
+    margin-inline: auto;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1.35rem;
+    background:
+      radial-gradient(circle at 2rem 0, rgba(26, 112, 80, 0.14), transparent 9rem),
+      #03130d;
+    box-shadow: 0 12px 32px rgba(3, 19, 13, 0.08);
+    color: var(--color-paper);
+    pointer-events: auto;
+    transition:
+      border-radius 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.3s ease,
+      background-color 0.3s ease;
+  }
+
+  .site-header-shell.is-scrolled,
+  .site-header-shell.is-open {
+    box-shadow: 0 18px 48px rgba(3, 19, 13, 0.2);
+  }
+
+  .site-header-row {
+    display: flex;
+    min-height: 3.5rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-inline: 0.9rem 0.45rem;
+  }
+
+  .site-header-logo {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    border-radius: 0.45rem;
+    padding: 0.35rem;
+  }
+
+  .site-header-desktop-nav,
+  .site-header-desktop-cta.btn {
+    display: none;
+  }
+
+  .site-menu-toggle {
+    position: relative;
+    display: inline-flex;
+    width: 2.75rem;
+    height: 2.75rem;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--color-paper);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+  .site-menu-toggle:hover {
+    background: rgba(255, 255, 255, 0.07);
+  }
+
+  .site-menu-line {
+    position: absolute;
+    width: 1.2rem;
+    height: 1.5px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.84);
+    transform-origin: center;
+    transition: transform 0.42s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .site-menu-line-top {
+    transform: translateY(-0.25rem);
+  }
+
+  .site-menu-line-bottom {
+    transform: translateY(0.25rem);
+  }
+
+  .site-header-shell.is-open .site-menu-line-top {
+    transform: rotate(45deg);
+  }
+
+  .site-header-shell.is-open .site-menu-line-bottom {
+    transform: rotate(-45deg);
+  }
+
+  .site-mobile-menu {
+    display: grid;
+    grid-template-rows: 0fr;
+    visibility: hidden;
+    opacity: 0;
+    transition:
+      grid-template-rows 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 0.22s ease,
+      visibility 0s linear 0.45s;
+  }
+
+  .site-mobile-menu-inner {
+    min-height: 0;
+    max-height: calc(100dvh - 5.75rem);
+    overflow: hidden auto;
+    padding: 0 1rem;
+    transition: padding 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .site-header-shell.is-open .site-mobile-menu {
+    grid-template-rows: 1fr;
+    visibility: visible;
+    opacity: 1;
+    transition:
+      grid-template-rows 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 0.3s ease 0.08s,
+      visibility 0s linear;
+  }
+
+  .site-header-shell.is-open .site-mobile-menu-inner {
+    padding: 0.45rem 1.15rem 1.3rem;
+  }
+
+  .site-mobile-nav {
+    display: grid;
+    gap: 0.05rem;
+  }
+
+  .site-mobile-nav-link {
+    display: flex;
+    min-height: 2.7rem;
+    align-items: center;
+    border-radius: 0.6rem;
+    padding-inline: 0.35rem;
+    color: rgba(255, 255, 255, 0.86);
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .site-mobile-nav-link:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--color-paper);
+    transform: translateX(0.15rem);
+  }
+
+  .site-mobile-cta {
+    width: fit-content;
+    margin-top: 1.15rem;
+    padding-inline: 1.35rem;
+  }
+
+  @media (min-width: 64rem) {
+    .site-header {
+      padding: 1.1rem 1.25rem 0;
+    }
+
+    .site-header-shell {
+      border-radius: 999px;
+    }
+
+    .site-header-row {
+      min-height: 4.25rem;
+      gap: clamp(1.5rem, 3vw, 3.5rem);
+      padding-inline: 1.35rem 0.75rem;
+    }
+
+    .site-header-logo {
+      padding-inline: 0.15rem;
+    }
+
+    .site-header-desktop-nav {
+      display: flex;
+      min-width: 0;
+      flex: 1;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(1.25rem, 2.5vw, 2.35rem);
+    }
+
+    .site-header-nav-link {
+      position: relative;
+      color: rgba(255, 255, 255, 0.62);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+      transition: color 0.2s ease;
+    }
+
+    .site-header-nav-link::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 -0.45rem;
+      height: 1px;
+      background: currentColor;
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .site-header-nav-link:hover {
+      color: var(--color-paper);
+    }
+
+    .site-header-nav-link:hover::after {
+      transform: scaleX(1);
+    }
+
+    .site-header-desktop-cta.btn {
+      display: inline-flex;
+      flex: none;
+      padding: 0.8rem 1.3rem;
+    }
+
+    .site-menu-toggle,
+    .site-mobile-menu {
+      display: none;
+    }
+  }
+
   /* Ritmo vertical: uma regra só. Nenhum outro seletor define padding-block
      de seção — é aqui que layouts assim costumam brigar consigo mesmos. */
   .section {

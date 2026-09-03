@@ -30,6 +30,17 @@ export const nav = [
   { label: "Planos e Preços", href: "/#planos" },
 ] as const;
 
+/**
+ * Acesso de quem já é cliente. Fica fora de `nav` de propósito: `nav` são
+ * âncoras da página e este é o único link que sai do site para o aplicativo.
+ * O destino vem de `siteConfig.appUrl` — a URL não é escrita aqui.
+ */
+export const appAccess = {
+  label: "Entrar",
+  /** Rótulo do painel mobile, onde há espaço para ser explícito. */
+  mobileLabel: "Entrar na plataforma",
+} as const;
+
 export const hero = {
   eyebrow: "CRM imobiliário com IA",
   headline: ["Pare de operar.", "Comece a gerir."],

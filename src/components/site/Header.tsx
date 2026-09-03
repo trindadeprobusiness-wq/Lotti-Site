@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Logo } from "@/components/brand/Logo";
 import { Button } from "@/components/ui/Button";
-import { hero, nav } from "@/content/landing";
+import { siteConfig } from "@/config/site";
+import { appAccess, hero, nav } from "@/content/landing";
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -66,6 +67,15 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
+          {/* Sai do site para o aplicativo (outro domínio). É o único link
+              daqui que não é âncora desta página. */}
+          <a
+            href={siteConfig.appUrl}
+            className="hidden text-small font-medium text-muted transition-colors hover:text-forest lg:mr-2 lg:inline-flex"
+          >
+            {appAccess.label}
+          </a>
+
           <Button href="#demo" className="hidden lg:inline-flex">
             {hero.primaryCta}
           </Button>
@@ -104,14 +114,25 @@ export function Header() {
             ))}
           </nav>
 
-          <Button
-            href="#demo"
-            arrow
-            onClick={() => setOpen(false)}
-            className="w-full"
-          >
-            {hero.primaryCta}
-          </Button>
+          <div className="flex flex-col gap-3">
+            <Button
+              href="#demo"
+              arrow
+              onClick={() => setOpen(false)}
+              className="w-full"
+            >
+              {hero.primaryCta}
+            </Button>
+
+            <Button
+              href={siteConfig.appUrl}
+              variant="secondary"
+              onClick={() => setOpen(false)}
+              className="w-full"
+            >
+              {appAccess.mobileLabel}
+            </Button>
+          </div>
         </div>
       </div>
     </header>

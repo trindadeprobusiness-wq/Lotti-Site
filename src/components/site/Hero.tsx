@@ -29,7 +29,7 @@ export function Hero() {
         />
 
         <div className="mt-10 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
-          <Button href="#demo" arrow className="btn-shimmer w-full shadow-lg sm:w-auto">
+          <Button href="https://olivercrm.vercel.app/" arrow className="btn-shimmer w-full shadow-lg sm:w-auto" target="_blank" rel="noopener noreferrer">
             {hero.primaryCta}
           </Button>
           <Button

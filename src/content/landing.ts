@@ -26,17 +26,16 @@ import {
 export const nav = [
   { label: "Recursos", href: "/#recursos" },
   { label: "Como funciona", href: "/#como-funciona" },
-  { label: "Diferenciais", href: "/#diferenciais" },
-  { label: "Planos e Preços", href: "/#planos" },
+  { label: "Preços", href: "/#planos" },
 ] as const;
 
 export const hero = {
   eyebrow: "CRM imobiliário com IA",
   headline: ["Pare de operar.", "Comece a gerir."],
   lead: "A Lotti reúne captação, funil de vendas, contratos por IA e aluguéis com financeiro automático no mesmo lugar. A capacidade operacional de uma grande administradora, no tamanho do seu negócio.",
-  primaryCta: "Agendar demonstração",
+  primaryCta: "Acessar plataforma",
   secondaryCta: "Ver recursos",
-  footnote: "Demonstração guiada, sem compromisso.",
+  footnote: "Acesso gratuito por 14 dias, sem cartão.",
 } as const;
 
 export const problem = {

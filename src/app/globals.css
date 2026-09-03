@@ -619,4 +619,89 @@
       animation: none !important;
     }
   }
+
+  /* ---- Floating Dark Pill Header ----------------------------------------- */
+  .header-pill {
+    border: 1px solid transparent;
+    transition:
+      background-color 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+      backdrop-filter 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    max-width: 64rem;
+    margin-inline: auto;
+  }
+
+  .header-pill--top {
+    background: linear-gradient(
+      135deg,
+      rgba(5, 30, 20, 0.92) 0%,
+      rgba(9, 51, 35, 0.88) 50%,
+      rgba(5, 30, 20, 0.92) 100%
+    );
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow:
+      0 4px 24px rgba(0, 0, 0, 0.25),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  .header-pill--scrolled {
+    background: linear-gradient(
+      135deg,
+      rgba(3, 22, 14, 0.97) 0%,
+      rgba(7, 42, 28, 0.95) 50%,
+      rgba(3, 22, 14, 0.97) 100%
+    );
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.35),
+      0 2px 8px rgba(0, 0, 0, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(24px) saturate(1.2);
+    -webkit-backdrop-filter: blur(24px) saturate(1.2);
+  }
+
+  /* Nav link hover underline on dark bg */
+  .header-link {
+    position: relative;
+  }
+
+  .header-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    height: 1px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.6);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .header-link:hover::after {
+    transform: scaleX(1);
+  }
+
+  /* Enter button */
+  .header-enter-btn {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+  }
+
+  .header-enter-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.22);
+  }
+
+  .header-enter-btn:hover .header-enter-icon {
+    transform: translateX(2px);
+  }
+
+  .header-enter-icon {
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 2px 8px rgba(9, 51, 35, 0.5);
+  }
 }

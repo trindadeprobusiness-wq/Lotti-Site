@@ -4,15 +4,17 @@ import { useActionState, useId } from "react";
 import { useFormStatus } from "react-dom";
 import { CheckCircle2, MessageCircle } from "lucide-react";
 import {
-  initialDemoFormState,
+  type DemoFormState,
   scheduleDemo,
 } from "@/app/actions/schedule-demo";
 import { form as copy } from "@/content/landing";
 import { whatsappUrl } from "@/config/site";
 import { Button } from "./Button";
 
+const initialState: DemoFormState = { status: "idle" };
+
 export function DemoForm() {
-  const [state, action] = useActionState(scheduleDemo, initialDemoFormState);
+  const [state, action] = useActionState(scheduleDemo, initialState);
   const ids = useId();
   const whatsapp = whatsappUrl();
 

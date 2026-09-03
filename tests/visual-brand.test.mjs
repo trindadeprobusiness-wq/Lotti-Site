@@ -25,12 +25,13 @@ test("serve as duas assinaturas lineares oficiais", async () => {
   assert.match(light.body, /stop-color="white"|stop-color="#ffffff"/i);
 });
 
-test("renderiza a assinatura correta em fundos claros e escuros", async () => {
+test("renderiza a assinatura clara sobre as superfícies escuras", async () => {
   const { response, body } = await get("/");
 
   assert.equal(response.status, 200);
-  assert.match(body, /\/brand\/lotti-linear-dark\.svg/);
-  assert.match(body, /\/brand\/lotti-white\.svg/);
+  // Header em pílula escura, CTA final e rodapé: todos usam a versão branca.
+  assert.doesNotMatch(body, /\/brand\/lotti-linear-dark\.svg/);
+  assert.ok((body.match(/\/brand\/lotti-white\.svg/g) ?? []).length >= 3);
   assert.match(body, /<title>Lotti<\/title>/);
 });
 
@@ -261,6 +262,7 @@ test("usa o verde Lotti como acento em ações e progresso", async () => {
     styles,
     /\.link-underline::after\s*\{[^}]*background: linear-gradient\(to right, var\(--color-forest\), var\(--color-ink\)\)/,
   );
-  assert.match(header, /hover:text-forest/);
+  // No header escuro o verde aparece como acento no botão "Entrar".
+  assert.match(header, /bg-\[#093323\]/);
   assert.match(steps, /text-eyebrow uppercase text-forest/);
 });

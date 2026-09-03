@@ -3,9 +3,13 @@
 import { useEffect, useState } from "react";
 import { ArrowRight, Menu, X } from "lucide-react";
 import { Logo } from "@/components/brand/Logo";
+import { siteConfig } from "@/config/site";
 import { nav } from "@/content/landing";
 
-const PLATFORM_URL = "https://olivercrm.vercel.app/";
+// O endereço do app sai de siteConfig para não existir em duas cópias: este
+// link e o do Hero apontavam para olivercrm.vercel.app escrito à mão, e uma
+// troca de domínio deixaria um dos dois para trás.
+const PLATFORM_URL = siteConfig.appUrl;
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);

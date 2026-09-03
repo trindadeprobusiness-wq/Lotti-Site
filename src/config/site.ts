@@ -22,11 +22,17 @@ export const siteConfig = {
 
   /**
    * Domínio de produção — usado em canonical, sitemap e Open Graph.
-   * Provisório: aponta para o domínio da Vercel enquanto o definitivo não
-   * é conectado. Não use lotti.com.br — pertence a outro negócio.
+   * Não use lotti.com.br — pertence a outro negócio.
    */
-  domain: "lotti-site.vercel.app",
-  url: "https://lotti-site.vercel.app",
+  domain: "plataformalotti.com.br",
+  url: "https://plataformalotti.com.br",
+
+  /**
+   * Onde vive o aplicativo (CRM). Domínio SEPARADO do site: o app roda em
+   * outro projeto da Vercel. Todo botão de "Entrar"/"Acessar plataforma"
+   * aponta para cá — nunca para uma rota interna do site, que não existe.
+   */
+  appUrl: "https://app.plataformalotti.com.br",
 
   /** Só dígitos, com DDI e DDD. Ex.: "5511987654321" */
   whatsapp: PENDING as string,

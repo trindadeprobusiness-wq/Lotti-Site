@@ -59,6 +59,20 @@ function isRateLimited(ip: string): boolean {
 /** E-mail de destino fixo para leads do site */
 const LEAD_EMAIL = "uselottiapp@gmail.com";
 
+/**
+ * Escapa o que vai para o corpo HTML do e-mail. `name` e `creci` são texto
+ * livre do visitante: sem isso, um lead com `<a href="...">` chega como link
+ * clicável num e-mail que parece ter saído do nosso próprio sistema.
+ */
+function esc(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 export async function scheduleDemo(
   _prev: DemoFormState,
   formData: FormData,
@@ -144,27 +158,27 @@ export async function scheduleDemo(
               <table style="width: 100%; border-collapse: collapse;">
                 <tr>
                   <td style="padding: 12px 0; border-bottom: 1px solid #f3f4f6; color: #6b7280; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; width: 140px;">Nome</td>
-                  <td style="padding: 12px 0; border-bottom: 1px solid #f3f4f6; color: #111827; font-size: 15px;">${lead.name}</td>
+                  <td style="padding: 12px 0; border-bottom: 1px solid #f3f4f6; color: #111827; font-size: 15px;">${esc(lead.name)}</td>
                 </tr>
                 <tr>
                   <td style="padding: 12px 0; border-bottom: 1px solid #f3f4f6; color: #6b7280; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">WhatsApp</td>
                   <td style="padding: 12px 0; border-bottom: 1px solid #f3f4f6; color: #111827; font-size: 15px;">
-                    <a href="https://wa.me/${lead.whatsapp}" style="color: #093323; text-decoration: none; font-weight: 500;">${lead.whatsapp}</a>
+                    <a href="https://wa.me/${esc(lead.whatsapp)}" style="color: #093323; text-decoration: none; font-weight: 500;">${esc(lead.whatsapp)}</a>
                   </td>
                 </tr>
                 <tr>
                   <td style="padding: 12px 0; border-bottom: 1px solid #f3f4f6; color: #6b7280; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">E-mail</td>
                   <td style="padding: 12px 0; border-bottom: 1px solid #f3f4f6; color: #111827; font-size: 15px;">
-                    <a href="mailto:${lead.email}" style="color: #093323; text-decoration: none; font-weight: 500;">${lead.email}</a>
+                    <a href="mailto:${esc(lead.email)}" style="color: #093323; text-decoration: none; font-weight: 500;">${esc(lead.email)}</a>
                   </td>
                 </tr>
                 <tr>
                   <td style="padding: 12px 0; border-bottom: 1px solid #f3f4f6; color: #6b7280; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">CRECI</td>
-                  <td style="padding: 12px 0; border-bottom: 1px solid #f3f4f6; color: #111827; font-size: 15px;">${lead.creci || "Não informado"}</td>
+                  <td style="padding: 12px 0; border-bottom: 1px solid #f3f4f6; color: #111827; font-size: 15px;">${esc(lead.creci || "Não informado")}</td>
                 </tr>
                 <tr>
                   <td style="padding: 12px 0; color: #6b7280; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em;">Carteira</td>
-                  <td style="padding: 12px 0; color: #111827; font-size: 15px; font-weight: 500;">${lead.portfolio}</td>
+                  <td style="padding: 12px 0; color: #111827; font-size: 15px; font-weight: 500;">${esc(lead.portfolio)}</td>
                 </tr>
               </table>
             </div>

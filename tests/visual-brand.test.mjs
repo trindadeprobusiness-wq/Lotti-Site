@@ -32,7 +32,10 @@ test("renderiza a assinatura clara sobre as superfícies escuras", async () => {
   // Header em pílula escura, CTA final e rodapé: todos usam a versão branca.
   assert.doesNotMatch(body, /\/brand\/lotti-linear-dark\.svg/);
   assert.ok((body.match(/\/brand\/lotti-white\.svg/g) ?? []).length >= 3);
-  assert.match(body, /<title>Lotti<\/title>/);
+  // O <title> abre pela marca, para quem já busca a Lotti, e carrega o termo
+  // que o mercado pesquisa. Casa o formato, não a frase exata, para a copy
+  // poder ser afinada sem quebrar o teste.
+  assert.match(body, /<title>Lotti - [^<]*CRM Imobili[^<]*<\/title>/);
 });
 
 test("não exibe vídeo no hero", async () => {

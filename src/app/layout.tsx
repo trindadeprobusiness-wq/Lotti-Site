@@ -13,7 +13,13 @@ const sora = Sora({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: siteConfig.name,
+    /**
+     * O <title> é o campo de maior peso da página, e "Lotti" sozinho não
+     * carrega nenhum termo que alguém pesquise — ninguém busca a marca antes
+     * de conhecê-la. Começa pelo nome, para quem já busca a Lotti, e emenda o
+     * que o mercado procura. ~60 caracteres, o limite que o Google exibe.
+     */
+    default: `${siteConfig.name} - CRM Imobiliário com IA para Corretores e Imobiliárias`,
     template: `%s - ${siteConfig.name}`,
   },
   description: siteConfig.description,

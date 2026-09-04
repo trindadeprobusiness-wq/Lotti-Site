@@ -44,18 +44,25 @@ export const siteConfig = {
   },
 
   /**
-   * Vire para true depois de colocar os arquivos oficiais em public/brand/.
-   * Enquanto for false, o site desenha um símbolo provisório em SVG inline
-   * e compõe o wordmark em Sora. Ver README.
+   * Arquivos oficiais entregues e em uso em public/brand/.
+   *
+   * Atenção: hoje esta flag não é lida por nenhum componente. Logo.tsx e
+   * LottiMark.tsx servem os SVGs oficiais incondicionalmente — o símbolo
+   * provisório em SVG inline não existe mais. Mantida em true para não
+   * descrever um estado falso; candidata a remoção. Ver README.
    */
-  useOfficialBrandFiles: false,
+  useOfficialBrandFiles: true,
 
   /**
-   * Vire para true depois de colocar os prints em public/product/.
-   * Enquanto for false, cada espaço de imagem mostra a moldura de sistema
-   * SaaS do manual, sem inventar dado de tela. Ver README.
+   * Prints entregues e em uso em public/product/.
+   *
+   * Lida só por ProductShot, como padrão para quadros que não passam
+   * showScreenshot. Os dois usos atuais (Features.tsx) já passam a prop, então
+   * virar esta flag não muda nada hoje — vale para quadros novos. Sem print,
+   * ProductShot desenha a moldura de sistema do manual, sem inventar dado de
+   * tela. Ver README.
    */
-  useProductScreenshots: false,
+  useProductScreenshots: true,
 } as const;
 
 /** Link de WhatsApp com mensagem pronta, ou null se o número não foi preenchido. */

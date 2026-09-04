@@ -2,7 +2,7 @@
 
 import { headers } from "next/headers";
 import { z } from "zod";
-import { siteConfig } from "@/config/site";
+import { siteConfig, isPending } from "@/config/site";
 import { form as formCopy } from "@/content/landing";
 
 type FieldName = "name" | "whatsapp" | "email" | "creci" | "portfolio";
@@ -73,6 +73,18 @@ function esc(value: string): string {
     .replace(/'/g, "&#39;");
 }
 
+/**
+ * Só convida ao WhatsApp quando o número existe: com whatsapp em PENDING o
+ * botão não é renderizado, e apontar para um canal ausente deixa quem falhou
+ * no envio sem saída. Volta a mencionar o canal sozinho quando o número for
+ * preenchido em site.ts.
+ */
+function failureMessage(): string {
+  return isPending(siteConfig.whatsapp)
+    ? formCopy.genericError
+    : formCopy.genericErrorWithWhatsapp;
+}
+
 export async function scheduleDemo(
   _prev: DemoFormState,
   formData: FormData,
@@ -130,7 +142,7 @@ export async function scheduleDemo(
       "[lotti] RESEND_API_KEY ausente. Lead recebido:",
       lead,
     );
-    return { status: "error", values: raw, message: formCopy.genericError };
+    return { status: "error", values: raw, message: failureMessage() };
   }
 
   try {
@@ -206,11 +218,11 @@ export async function scheduleDemo(
     if (!response.ok) {
       const detail = await response.text();
       console.error("[lotti] Resend respondeu", response.status, detail, lead);
-      return { status: "error", values: raw, message: formCopy.genericError };
+      return { status: "error", values: raw, message: failureMessage() };
     }
   } catch (error) {
     console.error("[lotti] Falha ao enviar lead:", error, lead);
-    return { status: "error", values: raw, message: formCopy.genericError };
+    return { status: "error", values: raw, message: failureMessage() };
   }
 
   return { status: "success" };

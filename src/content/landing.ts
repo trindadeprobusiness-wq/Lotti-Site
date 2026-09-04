@@ -270,7 +270,15 @@ export const form = {
     description:
       "Entramos em contato pelo WhatsApp em até 1 dia útil para combinar o horário.",
   },
+  /**
+   * Falha no envio. Duas versões porque o convite ao WhatsApp só pode ser
+   * feito quando o número existe — com siteConfig.whatsapp em PENDING o botão
+   * não é renderizado, e mandar o visitante para um canal ausente o deixa sem
+   * saída nenhuma. schedule-demo.ts escolhe entre as duas.
+   */
   genericError:
+    "Não conseguimos enviar agora. Tente de novo em instantes.",
+  genericErrorWithWhatsapp:
     "Não conseguimos enviar agora. Tente de novo em instantes ou fale com a gente pelo WhatsApp.",
 } as const;
 
